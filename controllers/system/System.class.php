@@ -1,0 +1,46 @@
+<?php
+abstract class System
+{
+
+    public static function Request($url){
+        return [
+                "METHOD" => self::HTTP_METHOD(),
+                "PATH" => self::HTTP_PATH($url),
+                ];
+    }
+
+    public static function URI_COMPARE($valor){
+        return self::URI_HASH($valor);
+    }
+
+    private static function HTTP_METHOD(){
+        return filter_input(INPUT_SERVER, 'REQUEST_METHOD');
+    }
+
+    private static function HTTP_PATH($url){
+        return explode('/', $url);
+    }
+
+    private static function URI_HASH($valor){
+
+        $metodos = [
+                        "usuario" => "f8032d5cae3de20fcec887f395ec9a6a",
+                        "getusuario" => "c494e4539220ba43bb76159d22e70a66",
+                        "putusuario" => "f757f01ff43e111bbddfabd18d99d03f",
+                        "updateusuario" => "3b666aaf61ff766211491d9d46cfeb0a",
+                        "deleteusuario" => "1dcd0a49a4a152c08a53695cbacfa616",
+                        "parceiro" => "22935d7f7084b1ef474f7a006d2102ce",
+                        "getparceiro" => "183628fa96d1c1ec88e09ebe83fb96b4",
+                        "putparceiro" => "16ddac9584e012e2173fb52566979e22",
+                        "updateparceiro" => "c0663d4ca6d92f5a257bcd607c867b8f",
+                        "deleteparceiro" => "f6a0f79c5dcb58638a95b38bb8d3b08c",
+                        "cupom" => "f61e7f04c539f2aa08d2ddb23be63f92",
+                        "getcupom" => "15bc2f541b0ff3869471b514eb5e4fa9",
+                        "putcupom" => "e2f189e0949db9308441953db5293a72",
+                        "updatecupom" => "cb1219577315b48fba401a166f4c99c0",
+                        "deletecupom" => "5a7ce680226189faf51dce0b5419b77a"
+                    ];
+
+        return array_search($valor, $metodos);
+    }
+}

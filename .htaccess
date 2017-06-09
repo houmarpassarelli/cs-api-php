@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ init.php/$1 [L]
+    RewriteRule ^/*?$ - [F,L]
+    RewriteRule ^models/*?$ - [F,L]
+    RewriteRule ^controllers/*?$ - [F,L]
+</IfModule>
