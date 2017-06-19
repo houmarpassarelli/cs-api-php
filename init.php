@@ -3,11 +3,11 @@
 require('config.inc.php');
 require('abstract.php');
 
-var_dump(System::Request($_SERVER['REQUEST_URI']));
+var_dump((new System())->Request($_SERVER['REQUEST_URI']));
 echo '<br />';
-echo sha1('hackers2');
+//echo sha1('hackers2');
 echo '<br />';
-echo sha1('senha');
+//echo sha1('senha');
 echo '<br />';
 
 $teste["INFO"] =[
@@ -17,7 +17,7 @@ $teste["INFO"] =[
     "email2" => "houmar@agendaassessoria.com.br"
 ];
 
-print_r($teste);
+//print_r($teste);
 
 $teste2["ENDERECO"] = [
     "logradouro" => "Rua Itapuã",
@@ -29,22 +29,29 @@ $teste2["ENDERECO"] = [
 ];
 
 echo '<br />';
+echo '<br />';
 
-$request = System::Request($_SERVER['REQUEST_URI']);
+
+
+$request = (new System())->Request($_SERVER['REQUEST_URI']);
 $dados = NULL;
 
+//var_dump((new System())->URI_COMPARE($request["PATH"][1]));
+
 if(!empty($request["PATH"][2])):
-    switch (System::URI_COMPARE($request["PATH"][2])):
+    switch ((new System())->URI_COMPARE($request["PATH"][2])):
         case 'usuario' :
             if(!empty($request["PATH"][3])):
                 if($request["METHOD"] == 'GET'):
                     @$dados = (new callUsuario([
-                                                "METODO" => System::URI_COMPARE($request["PATH"][3]),
+                                                "METODO" => $request["PATH"][3],
+                                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
                                                 "ID" => $request["PATH"][4]
                                             ]))->Resultado();
                 elseif($request["METHOD"] == 'PUT'):
                     $dados = (new callUsuario([
-                                                "METODO" => System::URI_COMPARE($request["PATH"][3]),
+                                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                                                "METODO" => $request["PATH"][3],
                                                 "ID" => $request["PATH"][4],
                                                 "DADOS" => $teste2
                                             ]))->Resultado();
@@ -54,11 +61,11 @@ if(!empty($request["PATH"][2])):
             else:
                 if($request["METHOD"] == 'POST'):
                     $dados = (new callUsuario([
-                                                "METODO" => System::URI_COMPARE("f757f01ff43e111bbddfabd18d99d03f"),
+                                                "METODO" => (new System())->URI_COMPARE("f757f01ff43e111bbddfabd18d99d03f"),
                                                 "DADOS" => $teste
                                             ]))->Resultado();
                 elseif($request["METHOD"] == 'GET'):
-                    $dados = (new callUsuario(["METODO" => System::URI_COMPARE("c494e4539220ba43bb76159d22e70a66")]))->Resultado();
+                    $dados = (new callUsuario(["METODO" => (new System())->URI_COMPARE("c494e4539220ba43bb76159d22e70a66")]))->Resultado();
                 endif;
             endif;
             break;
@@ -66,12 +73,12 @@ if(!empty($request["PATH"][2])):
             if(!empty($request["PATH"][3])):
                 if($request["METHOD"] == 'GET'):
                     @$dados = (new callCupom([
-                                                "METODO" => System::URI_COMPARE($request["PATH"][3]),
+                                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
                                                 "ID" => $request["PATH"][4]
                                             ]))->Resultado();
                 elseif($request["METHOD"] == 'PUT'):
                     $dados = (new callCupom([
-                                                "METODO" => System::URI_COMPARE($request["PATH"][3]),
+                                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
                                                 "ID" => $request["PATH"][4],
                                                 "DADOS" => $teste2
                                             ]))->Resultado();
@@ -81,11 +88,11 @@ if(!empty($request["PATH"][2])):
             else:
                 if($request["METHOD"] == 'POST'):
                     $dados = (new callCupom([
-                                            "METODO" => System::URI_COMPARE("e2f189e0949db9308441953db5293a72"),
+                                            "METODO" => (new System())->URI_COMPARE("e2f189e0949db9308441953db5293a72"),
                                             "DADOS" => $teste
                                         ]))->Resultado();
                 else:
-                    $dados = (new callCupom(["METODO" => System::URI_COMPARE("15bc2f541b0ff3869471b514eb5e4fa9")]))->Resultado();
+                    $dados = (new callCupom(["METODO" => (new System())->URI_COMPARE("15bc2f541b0ff3869471b514eb5e4fa9")]))->Resultado();
                 endif;
             endif;
             break;
@@ -134,6 +141,6 @@ if(!empty($request["PATH"][2])):
     //file_put_contents('php://output', $dados);
     echo '<pre>';
     //echo $dados;
-    var_dump($dados);
+    //var_dump($dados);
     echo '</pre>';
 endif;

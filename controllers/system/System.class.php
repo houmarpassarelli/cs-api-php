@@ -1,29 +1,42 @@
 <?php
-abstract class System
+class System extends Conexao
 {
 
-    public static function Request($url){
+    private $URI;
+
+    public function Request($url){
         return [
-                "METHOD" => self::HTTP_METHOD(),
-                "PATH" => self::HTTP_PATH($url),
+                "METHOD" => $this->HTTP_METHOD(),
+                "PATH" => $this->HTTP_PATH($url),
                 ];
     }
 
-    public static function URI_COMPARE($valor){
-        return self::URI_HASH($valor);
+    public function URI_COMPARE($valor){
+
+        $this->URI = $valor;
+        return $this->URI_HASH();
     }
 
-    private static function HTTP_METHOD(){
+    private function Conexao(){
+        return parent::getCon();
+    }
+
+    private function HTTP_METHOD(){
         return filter_input(INPUT_SERVER, 'REQUEST_METHOD');
     }
 
-    private static function HTTP_PATH($url){
+    private function HTTP_PATH($url){
         return explode('/', $url);
     }
 
-    private static function URI_HASH($valor){
+    private function URI_HASH(){
 
-        $metodos = [
+        $Conexao = $this->Conexao();
+        $Collection = $Conexao->csbd->sysparam;
+
+        $Resultado = $Collection->distinct($this->URI);
+
+        /*$metodos = [
                         "usuario" => "f8032d5cae3de20fcec887f395ec9a6a",
                         "getusuario" => "c494e4539220ba43bb76159d22e70a66",
                         "putusuario" => "f757f01ff43e111bbddfabd18d99d03f",
@@ -39,8 +52,9 @@ abstract class System
                         "putcupom" => "e2f189e0949db9308441953db5293a72",
                         "updatecupom" => "cb1219577315b48fba401a166f4c99c0",
                         "deletecupom" => "5a7ce680226189faf51dce0b5419b77a"
-                    ];
-
-        return array_search($valor, $metodos);
+                    ];*/
+     
+        return $Resultado[0];      
+        
     }
 }
