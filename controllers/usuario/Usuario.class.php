@@ -19,19 +19,20 @@ class Usuario extends Conexao
         return parent::getCon();
     }
 
-    private function getusuario(){
+    private function getusuario($interno = FALSE){
 
         $Conexao = $this->Conexao();
         $Collection = $Conexao->csdb->usuario;
 
         if(!is_null($this->ID)):
             $Resultado = $Collection->findOne(["identify" => $this->ID]);
-
         else:
-            $Resultado  = $Collection->find([])->toArray();
+            $Resultado  = $Collection->find()->toArray();
         endif;
 
-        $this->Retorno = json_encode($Resultado);
+        $this->Retorno = json_encode($Resultado[0]["dados"]);
+        //$this->Retorno = $Resultado[0];
+
     }
 
     private function putusuario(){

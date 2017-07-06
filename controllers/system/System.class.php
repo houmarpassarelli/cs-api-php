@@ -31,10 +31,10 @@ class System extends Conexao
 
     private function URI_HASH(){
 
-        $Conexao = $this->Conexao();
-        $Collection = $Conexao->csbd->sysparam;
+        //$Conexao = $this->Conexao();
+        //$Collection = $Conexao->csdb->sysparam;
 
-        $Resultado = $Collection->distinct($this->URI);
+        //$Resultado = $Collection->distinct($this->URI);
 
         /*$metodos = [
                         "usuario" => "f8032d5cae3de20fcec887f395ec9a6a",
@@ -54,7 +54,6 @@ class System extends Conexao
                         "deletecupom" => "5a7ce680226189faf51dce0b5419b77a"
                     ];*/
      
-        return $Resultado[0];      
-        
+        return $this->Conexao()->csdb->sysparam->distinct($this->URI)[0];
     }
 }

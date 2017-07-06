@@ -4,10 +4,12 @@ set_time_limit(0);
 require_once ('vendor/autoload.php');
 
 //GLOBAIS PARA ACESSO AO BANCO
-define('USER','root');
-define('PWD','');
-define('HOST','127.0.0.1');
-define('DB','cupomstore');
+//define('USER','root');
+//define('PWD','');
+//define('HOST','127.0.0.1');
+define('DB','csdb');
+
+
 
 
 //FUNÇÃO PARA CARREGAR CLASSES
