@@ -58,7 +58,7 @@ if(!empty($request["PATH"][2])):
                 if($request["METHOD"] == 'POST'):
                     $output = (new callCupom([
                                             "METODO" => (new System())->URI_COMPARE("e2f189e0949db9308441953db5293a72"),
-                                            "DADOS" => $teste
+                                            "DADOS" => $dados
                                         ]))->Resultado();
                 else:
                     $output = (new callCupom(["METODO" => (new System())->URI_COMPARE("15bc2f541b0ff3869471b514eb5e4fa9")]))->Resultado();
@@ -68,7 +68,10 @@ if(!empty($request["PATH"][2])):
         case 'parceiro' :
             if(!empty($request["PATH"][3])):
                 if($request["METHOD"] == 'GET'):
-                    $output = 'GET';
+                    @$output = (new callParceiro([
+                                    "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                                    "ID" => $request["PATH"][4]
+                                ]))->Resultado();
                 elseif($request["METHOD"] == 'PUT'):
                     $output = 'PUT';
                 elseif($request["METHOD"] == 'DELETE'):
@@ -76,7 +79,10 @@ if(!empty($request["PATH"][2])):
                 endif;
             else:
                 if($request["METHOD"] == 'POST'):
-                    $output = 'POST - EMPTY';
+                    $output = (new callParceiro([
+                                    "METODO" => (new System())->URI_COMPARE("16ddac9584e012e2173fb52566979e22"),
+                                    "DADOS" => $dados
+                                ]))->Resultado();
                 else:
                     $output = 'GET - EMPTY';
                 endif;
@@ -106,7 +112,18 @@ if(!empty($request["PATH"][2])):
                 endif;
             endif;
             break;
+        case 'login':
+            if(!empty($request["PATH"][3])):
+                if($request["METHOD"] == 'POST'):
+                    @$output = (new callLogin([
+                                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                                                "DADOS" => $dados
+                                ]))->Resultado();
+                endif;
+            endif;
+            break;
     endswitch;
     file_put_contents('php://output', $output);
+    //print_r($output);
 endif;
 ?>

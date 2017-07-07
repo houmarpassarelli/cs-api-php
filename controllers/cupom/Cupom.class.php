@@ -31,7 +31,7 @@ class Cupom extends Conexao
         $Collection = $Conexao->csdb->cupom;
 
         if(!is_null($this->ID)):
-            $Resultado = $Collection->findOne(["identify" => $this->ID]);
+            $Resultado = $Collection->findOne(["_id" => new MongoDB\BSON\ObjectID($this->ID)]);
 
         else:
             $Resultado  = $Collection->find([])->toArray();
@@ -44,12 +44,12 @@ class Cupom extends Conexao
 
         if(!is_null($this->Dados)):
 
-            @$Dados = [ "identify" => md5($this->Dados["nome"].date('dmYHis')), "dados" => [$this->Dados]];
+            //@$Dados = [ "identify" => md5($this->Dados["nome"].date('dmYHis')), "dados" => [$this->Dados]];
 
             $Conexao = $this->Conexao();
             $Collection = $Conexao->csdb->cupom;
 
-            $this->Retorno = $Collection->insertOne($Dados)->getInsertedCount() ?? 0;
+            $this->Retorno = $Collection->insertOne($this->Dados)->getInsertedCount() ?? 0;
         else:
             $this->Retorno = 0;
         endif;
@@ -62,7 +62,7 @@ class Cupom extends Conexao
             $Conexao = $this->Conexao();
             $Collection = $Conexao->csdb->cupom;
 
-            $this->Retorno = $Collection->updateOne(["identify" => $this->ID],['$push' => ["dados" => $this->Dados]])->getModifiedCount() ?? 0;
+            $this->Retorno = $Collection->updateOne(["_id" => new MongoDB\BSON\ObjectID($this->ID)],['$push' => $this->Dados])->getModifiedCount() ?? 0;
         else:
             $this->Retorno = 0;
         endif;

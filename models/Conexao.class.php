@@ -17,6 +17,10 @@ abstract class Conexao {
 //                $this->instancia = new PDO('mysql:host='.$this->host.';dbname='.$this->database,$this->user,$this->password,$opcoes);
 //            endif;
 //        }catch(PDOException $erro){
+//            echo $erro->getCode();
+//            echo $erro->getMessage();
+//            echo $erro->getFile();
+//            echo $erro->getLine();
 //            //PHPErro($erro->getCode(), $erro->getMessage(),$erro->getFile(), $erro->getLine());
 //            //die;
 //        }

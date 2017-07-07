@@ -46,3 +46,18 @@ class callCupom{
         return $this->Output;
     }
 }
+
+class callLogin{
+
+    private $Output;
+
+    public function __construct(array $dados)
+    {
+        $this->Output = (new Login())->Retorno($dados);
+        $this->Resultado();
+    }
+
+    public function Resultado(){
+        return $this->Output;
+    }
+}

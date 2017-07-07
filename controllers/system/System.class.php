@@ -51,9 +51,13 @@ class System extends Conexao
                         "getcupom" => "15bc2f541b0ff3869471b514eb5e4fa9",
                         "putcupom" => "e2f189e0949db9308441953db5293a72",
                         "updatecupom" => "cb1219577315b48fba401a166f4c99c0",
-                        "deletecupom" => "5a7ce680226189faf51dce0b5419b77a"
+                        "deletecupom" => "5a7ce680226189faf51dce0b5419b77a",
+                        "login" => "d56b699830e77ba53855679cb1d252da",
+                        "checkLogin" => "c0ef4307f8ff9b9beded5c3967c53e9a"
                     ];*/
      
         return $this->Conexao()->csdb->sysparam->distinct($this->URI)[0];
+
+
     }
 }

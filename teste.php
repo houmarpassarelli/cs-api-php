@@ -6,6 +6,6 @@
  * Time: 23:59
  */
 
-echo "'teste de permissão do linux";
+//echo "'teste de permissão do linux";
 
-echo md5('deletecupom');
+echo md5('checkLogin');
