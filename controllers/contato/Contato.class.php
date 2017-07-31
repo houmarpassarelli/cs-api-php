@@ -46,6 +46,8 @@ class Contato
                                         FROM usuario_contato C
                                         LEFT JOIN usuario u ON u.id_usuario = c.id_contato
                                         WHERE c.id_usuario = (SELECT id_usuario FROM usuario WHERE codigo = :codigo)", NULL, NULL, "codigo={$this->ID}", FALSE);
+
+            $this->Retorno = json_encode($Exibir->Resultado());
         endif;
     }
 }
