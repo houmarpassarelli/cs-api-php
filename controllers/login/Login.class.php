@@ -13,26 +13,26 @@ class Login extends Conexao
         return $this->Retorno;
     }
 
-    private function Conexao(){
-        return parent::getCon();
-    }
+    // private function Conexao(){
+    //     return parent::getCon();
+    // }
 
     private function checkLogin(){
 
-        $Conexao = $this->Conexao();
-        $Collection = $Conexao->csdb->usuario;
+        
+        
+        $Email = new Exibir();
+        $Email->exeExibir("SELECT COUNT(*) AS count FROM usuario WHERE email = '{$this->Dados['email']}'", NULL, NULL, NULL, FALSE);
 
-        if(!is_null($this->Dados)):
-            $Resultado = $Collection->find(["usuario" => $this->Dados["usuario"], "senha" => $this->Dados["senha"]])->toArray();
-        endif;
 
-        if($Resultado):
-            $Retorno = $Resultado;
-        else:
-            $Retorno = false;
+
+        exit(var_dump($Email->Resultado()[0]['count']));
+
+        if($email->rowCount() > 0):
+
         endif;
 
         $this->Retorno = json_encode($Retorno);
-        //$this->Retorno = $Resultado;
+        
     }
 }

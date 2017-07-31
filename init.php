@@ -124,6 +124,6 @@ if(!empty($request["PATH"][2])):
             break;
     endswitch;
     file_put_contents('php://output', $output);
-    //print_r($output);
+    print_r($output);
 endif;
 ?>

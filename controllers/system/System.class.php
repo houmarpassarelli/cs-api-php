@@ -36,7 +36,7 @@ class System extends Conexao
 
         //$Resultado = $Collection->distinct($this->URI);
 
-        /*$metodos = [
+        $metodos = [
                         "usuario" => "f8032d5cae3de20fcec887f395ec9a6a",
                         "getusuario" => "c494e4539220ba43bb76159d22e70a66",
                         "putusuario" => "f757f01ff43e111bbddfabd18d99d03f",
@@ -54,10 +54,11 @@ class System extends Conexao
                         "deletecupom" => "5a7ce680226189faf51dce0b5419b77a",
                         "login" => "d56b699830e77ba53855679cb1d252da",
                         "checkLogin" => "c0ef4307f8ff9b9beded5c3967c53e9a"
-                    ];*/
+                    ];
      
-        return $this->Conexao()->csdb->sysparam->distinct($this->URI)[0];
+       
 
+        return array_search($this->URI, $metodos);
 
     }
 }
