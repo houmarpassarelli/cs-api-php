@@ -61,3 +61,32 @@ class callLogin{
         return $this->Output;
     }
 }
+
+class callPacote{
+
+    private $Output;
+
+    public function __construct(array $dados)
+    {
+        $this->Output = (new Pacote())->Retorno($dados);
+        $this->Resultado();
+    }
+
+    public function Resultado(){
+        return $this->Output;
+    }
+}
+
+class callContato{
+    private $Output;
+
+    public function __construct(array $dados)
+    {
+        $this->Output = (new Contato())->Retorno($dados);
+        $this->Resultado();
+    }
+
+    public function Resultado(){
+        return $this->Output;
+    }
+}

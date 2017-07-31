@@ -21,10 +21,6 @@ class Cupom extends Conexao
         return $this->Retorno;
     }
 
-    private function Conexao(){
-        return parent::getCon();
-    }
-
     private function getcupom(){
 
         $Conexao = $this->Conexao();
@@ -42,17 +38,6 @@ class Cupom extends Conexao
 
     private function putcupom(){
 
-        if(!is_null($this->Dados)):
-
-            //@$Dados = [ "identify" => md5($this->Dados["nome"].date('dmYHis')), "dados" => [$this->Dados]];
-
-            $Conexao = $this->Conexao();
-            $Collection = $Conexao->csdb->cupom;
-
-            $this->Retorno = $Collection->insertOne($this->Dados)->getInsertedCount() ?? 0;
-        else:
-            $this->Retorno = 0;
-        endif;
     }
 
     private function updatecupom(){

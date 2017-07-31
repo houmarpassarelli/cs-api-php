@@ -31,11 +31,6 @@ class System extends Conexao
 
     private function URI_HASH(){
 
-        //$Conexao = $this->Conexao();
-        //$Collection = $Conexao->csdb->sysparam;
-
-        //$Resultado = $Collection->distinct($this->URI);
-
         $metodos = [
                         "usuario" => "f8032d5cae3de20fcec887f395ec9a6a",
                         "getusuario" => "c494e4539220ba43bb76159d22e70a66",
@@ -53,12 +48,54 @@ class System extends Conexao
                         "updatecupom" => "cb1219577315b48fba401a166f4c99c0",
                         "deletecupom" => "5a7ce680226189faf51dce0b5419b77a",
                         "login" => "d56b699830e77ba53855679cb1d252da",
-                        "checkLogin" => "c0ef4307f8ff9b9beded5c3967c53e9a"
+                        "checkLogin" => "c0ef4307f8ff9b9beded5c3967c53e9a",
+                        "pacote" => "c307f45ed96b6596975a477a22f199f0",
+                        "getpacote" => "772f4e03368ec3654f10d185260398e6",
+                        "putpacote" => "0710e0529b97eda266e332822f9cd0fc",
+                        "updatepacote" => "",
+                        "deletepacote" => "",
+                        "contato" => "b5f06e72d6d5104bdae7736fd0786d9c",
+                        "getcontato" => "e3c1501305ee0d32e71bb89477376fa0",
+                        "putcontato" => "0c6ed687d54ffc4b7c1df5ccbe6c6e30",
+                        "updatecontato" => "",
+                        "deletecontato" => ""
                     ];
      
        
 
         return array_search($this->URI, $metodos);
 
+    }
+
+    static public function verificaEmail($email) : array{
+
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)):
+
+            $Email = new Exibir();
+            $Email->exeExibir(NULL, "usuario","WHERE email = :email","email={$email}", FALSE);
+
+            if($Email->Resultado()):
+                return [false, '0202'];
+            else:
+                return [true, '200'];
+            endif;
+        else:
+            return [false, '0201'];
+        endif;
+    }
+
+    static public function verificaLogin($login) : array{
+
+        $usuario = md5($login);
+
+        $Login = new Exibir();
+        $Login->exeExibir(NULL, "usuario_access", "WHERE login = :login","login={$usuario}", FALSE);
+
+        if($Login->Resultado()):
+            return [false, '0101'];
+        else:
+
+            return [true, '200'];
+        endif;
     }
 }

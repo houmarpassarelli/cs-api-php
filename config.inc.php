@@ -19,7 +19,9 @@ function default_classes($Class)
                 'controllers/usuario',
                 'controllers/parceiro',
                 'controllers/login',
-                'controllers/cupom'
+                'controllers/cupom',
+                'controllers/pacote',
+                'controllers/contato'
             ];
     $iDir = NULL;
 
@@ -34,4 +36,17 @@ function default_classes($Class)
 }
 
 spl_autoload_register('default_classes');
+
+function PHPErro($Codigo, $Mensagem, $Arquivo, $Linha){
+    $eClasse = ($Codigo == E_USER_NOTICE ? INFO : ($Codigo == E_USER_WARNING ? ALERT : ($Codigo == E_USER_ERROR ? ERROR : $Codigo)));
+    if(!strstr($Mensagem, 'in_array')):
+        echo "<div class=\"aviso {$eClasse}\">";
+        echo "<span>Erro na linha: #{$Linha} :: {$Mensagem}</span>";
+        echo "</span>Arquivo:{$Arquivo}</span>";
+        echo "</div>";
+    endif;
+    if($eClasse == E_USER_ERROR):
+        die;
+    endif;
+}
 

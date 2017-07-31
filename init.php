@@ -99,9 +99,35 @@ if(!empty($request["PATH"][2])):
                 endif;
             else:
                 if($request["METHOD"] == 'POST'):
-                    $output = 'POST - EMPTY';
+                    $output = (new callPacote([
+                                    "METODO" => (new System())->URI_COMPARE("0710e0529b97eda266e332822f9cd0fc"),
+                                    "DADOS" => $dados
+                                ]))->Resultado();
                 else:
-                    $output = 'GET - EMPTY';
+                    $output = (new callPacote(["METODO" => (new System())->URI_COMPARE("772f4e03368ec3654f10d185260398e6")]))->Resultado();
+                endif;
+            endif;
+            break;
+        case 'contato' :
+            if(!empty($request["PATH"][3])):
+                if($request["METHOD"] == 'GET'):
+                    $output = (new callContato([
+                                    "METODO" => (new System())->URI_COMPARE("e3c1501305ee0d32e71bb89477376fa0"),
+                                    "ID" => $request["PATH"][4]
+                                ]))->Resultado();;
+                elseif($request["METHOD"] == 'PUT'):
+                    $output = 'PUT';
+                elseif($request["METHOD"] == 'DELETE'):
+                    $output = 'UPDATE';
+                endif;
+            else:
+                if($request["METHOD"] == 'POST'):
+                    $output = (new callContato([
+                        "METODO" => (new System())->URI_COMPARE("0c6ed687d54ffc4b7c1df5ccbe6c6e30"),
+                        "DADOS" => $dados
+                    ]))->Resultado();
+                else:
+                    $output = (new callContato(["METODO" => (new System())->URI_COMPARE("e3c1501305ee0d32e71bb89477376fa0")]))->Resultado();
                 endif;
             endif;
             break;
@@ -124,6 +150,6 @@ if(!empty($request["PATH"][2])):
             break;
     endswitch;
     file_put_contents('php://output', $output);
-    print_r($output);
+    //print_r($output);
 endif;
 ?>
