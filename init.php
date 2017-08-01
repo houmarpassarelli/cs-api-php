@@ -92,6 +92,11 @@ if(!empty($request["PATH"][2])):
             if(!empty($request["PATH"][3])):
                 if($request["METHOD"] == 'GET'):
                     $output = 'GET';
+                elseif($request["METHOD"] == 'POST'):
+                    $output = (new callPacote([
+                                    "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                                    "DADOS" => $dados
+                                ]))->Resultado();
                 elseif($request["METHOD"] == 'PUT'):
                     $output = 'PUT';
                 elseif($request["METHOD"] == 'DELETE'):

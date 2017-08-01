@@ -11,6 +11,7 @@ class Cupom extends Conexao
     private $Retorno;
     private $Dados;
     private $ID;
+    private $Codigo;
 
     public function Retorno(array $dados){
 
@@ -23,17 +24,14 @@ class Cupom extends Conexao
 
     private function getcupom(){
 
-        $Conexao = $this->Conexao();
-        $Collection = $Conexao->csdb->cupom;
-
         if(!is_null($this->ID)):
-            $Resultado = $Collection->findOne(["_id" => new MongoDB\BSON\ObjectID($this->ID)]);
+
+
 
         else:
-            $Resultado  = $Collection->find([])->toArray();
+
         endif;
 
-        $this->Retorno = json_encode($Resultado);
     }
 
     private function putcupom(){
@@ -63,5 +61,25 @@ class Cupom extends Conexao
         else:
             $this->Retorno = 0;
         endif;
+    }
+
+    private function getcupomperpack(){
+
+        $perPack = new Exibir();
+        $perPack->exeExibir("SELECT
+                                    o.codigo AS id_cupom,
+                                    o.titulo AS titulo_cupom,
+                                    o.img AS img_cupom,
+                                    e.titulo AS titulo_parceiro,
+                                    e.logo AS img_parceiro
+                                    FROM oferta o
+                                    LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
+                                    WHERE id_pacote = :id", NULL, NULL, "id={$this->ID}", FALSE);
+
+        $this->Retorno = json_encode($perPack->Resultado());
+    }
+
+    private function codeGenerate(){
+        $this->Codigo = hexdec(date("dmY").rand(1,999));
     }
 }

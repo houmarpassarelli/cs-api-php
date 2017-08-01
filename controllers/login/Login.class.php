@@ -24,9 +24,28 @@ class Login extends Conexao
             $Exibir->exeExibir(NULL, "usuario_access","WHERE senha = :senha","senha={$Senha}", FALSE);
 
             if($Exibir->Resultado()):
-                $this->Retorno = '200';
+
+                $Profile = new Exibir();
+                $Profile->exeExibir("SELECT
+                                                u.codigo,
+                                                u.nome,
+                                                u.sobrenome,
+                                                u.avatar,
+                                                u.email,
+                                                e.logradouro,
+                                                e.numero,
+                                                e.bairro,
+                                                e.cep,
+                                                c.titulo AS cidade,
+                                                c.sigla AS estado
+                                                FROM usuario u
+                                                LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
+                                                LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
+                                                WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
+
+                $this->Retorno = json_encode(['codigo' => '200', 'profile' => $Profile->Resultado()[0]]);
             else:
-                $this->Retorno = '0103';
+                $this->Retorno = json_encode(['codigo' => '0103']);
             endif;
         else:
             $Usuario = md5($this->Dados["usuario"]);
@@ -38,12 +57,31 @@ class Login extends Conexao
                 $Exibir->exeExibir(NULL, "usuario_access","WHERE senha = :senha","senha={$Senha}", FALSE);
 
                 if($Exibir->Resultado()):
-                    $this->Retorno = '200';
+
+                    $Profile = new Exibir();
+                    $Profile->exeExibir("SELECT
+                                                u.codigo,
+                                                u.nome,
+                                                u.sobrenome,
+                                                u.avatar,
+                                                u.email,
+                                                e.logradouro,
+                                                e.numero,
+                                                e.bairro,
+                                                e.cep,
+                                                c.titulo AS cidade,
+                                                c.sigla AS estado
+                                                FROM usuario u
+                                                LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
+                                                LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
+                                                WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
+
+                    $this->Retorno = json_encode(['codigo' => '200', 'profile' => $Profile->Resultado()[0]]);
                 else:
-                    $this->Retorno = '0103';
+                    $this->Retorno = json_encode(['codigo' => '0103']);
                 endif;
             else:
-                $this->Retorno = '0102';
+                $this->Retorno = json_encode(['codigo' => '0102']);
             endif;
         endif;
     }

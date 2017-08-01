@@ -62,6 +62,8 @@ class Usuario extends Conexao
 
         if(!is_null($this->Dados)):
 
+            unset($this->Dados['repeat']);
+
             $verificaEmail = System::verificaEmail($this->Dados["email"]);
             $verificaLogin = System::verificaLogin($this->Dados["login"]);
 
@@ -94,18 +96,18 @@ class Usuario extends Conexao
 
                 $Inserir->exeInserir("usuario_auth", $DadosAuth);
 
-                $this->Retorno = '200';
+                $this->Retorno = json_encode(["codigo" => "200"]);
             else:
                 if(!$verificaEmail[0]):
                     $this->Retorno = $verificaEmail[1];
                 elseif(!$verificaLogin[0]):
                     $this->Retorno = $verificaLogin[1];
                 else:
-                    $this->Retorno = '100';
+                    $this->Retorno = json_encode(["codigo" => "100" ]);
                 endif;
             endif;
         else:
-            $this->Retorno = '300';
+            $this->Retorno = json_encode(["codigo"=> "300"]);
         endif;
     }
 

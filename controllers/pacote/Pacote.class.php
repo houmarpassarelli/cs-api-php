@@ -49,4 +49,24 @@ class Pacote
             $this->Retorno = json_encode($Exibir->Resultado());
         endif;
     }
+
+    private function setpacote(){
+
+        $Usuario = new Exibir();
+        $Usuario->exeExibir("SELECT id_usuario FROM usuario WHERE codigo = :id", NULL, NULL,"id={$this->Dados['usuario_id']}", FALSE);
+
+        $Dados = [
+            "id_usuario" => $Usuario->Resultado()[0]["id_usuario"],
+            "id_pacote" => $this->Dados['pacote_id']
+        ];
+
+        $setPack = new Inserir();
+        $setPack->exeInserir("pacote_interacao", $Dados);
+
+        if($setPack->errorCode() == '23000' || $setPack->errorCode() == '42S02' || $setPack->errorCode() == '42S22'):
+            $this->Retorno = json_encode(["codigo" => $setPack->errorCode()]);
+        else:
+            $this->Retorno = json_encode(["codigo" => "200"]);
+        endif;
+    }
 }
