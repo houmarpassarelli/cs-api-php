@@ -6,7 +6,7 @@
  * Date: 31/05/2017
  * Time: 09:19
  */
-class Cupom extends Conexao
+class Cupom
 {
     private $Retorno;
     private $Dados;
@@ -20,6 +20,12 @@ class Cupom extends Conexao
         $this->{$dados["METODO"]}();
 
         return $this->Retorno;
+    }
+
+    static protected function setcupom(array $dados){
+
+        $Inserir = new Inserir();
+        $Inserir->exeInserir("oferta_interacao", ["id_pacote" => $dados["codpack"], "id_usuario" => $dados["iduser"], "id_oferta" => $dados["codcupom"], "hash" => $dados["hash"], "altcode" => $dados["altcode"]]);
     }
 
     private function getcupom(){
@@ -79,7 +85,23 @@ class Cupom extends Conexao
         $this->Retorno = json_encode($perPack->Resultado());
     }
 
-    private function codeGenerate(){
-        $this->Codigo = hexdec(date("dmY").rand(1,999));
+    private function getcupomperuser(){
+
+        $perUser = new Exibir();
+        $perUser->exeExibir("SELECT
+                                    o.codigo,  
+                                    o.titulo,
+                                    o.descricao,
+                                    o.min_pessoas,
+                                    o.max_pessoas,
+                                    o.validade,
+                                    o.img AS IMG_MAIN,
+                                    i.altcode,
+                                    i.qrcode
+                                    FROM oferta o
+                                    INNER JOIN oferta_interacao i ON i.id_oferta = o.id_oferta
+                                    WHERE i.id_usuario = (SELECT id_usuario FROM usuario WHERE codigo = :codigo)", NULL, NULL, "codigo={$this->ID}", FALSE);
+
+        $this->Retorno = json_encode($perUser->Resultado());
     }
 }

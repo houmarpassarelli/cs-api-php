@@ -67,15 +67,13 @@ class Usuario extends Conexao
             $verificaEmail = System::verificaEmail($this->Dados["email"]);
             $verificaLogin = System::verificaLogin($this->Dados["login"]);
 
-            $this->codeGenerate();
-
             if($verificaEmail[0] && $verificaLogin[0]):
 
                 $DadosUsuario = [
                     "nome" => $this->Dados["nome"],
                     "sobrenome" => $this->Dados["sobrenome"],
                     "email" => $this->Dados["email"],
-                    "codigo" => $this->Codigo
+                    "codigo" => System::longRandnDateCode()
                 ];
 
                 $Inserir = new Inserir();
@@ -126,12 +124,5 @@ class Usuario extends Conexao
         else:
             $this->Retorno = 0;
         endif;
-    }
-
-    private function codeGenerate(){
-
-        $Data = [date("y"), date("d"), date("m"), date("H"), date("i"), date("s")];
-
-        $this->Codigo = array_rand($Data, 1).mt_rand(1,99).array_rand($Data, 1).mt_rand(99,999).array_rand($Data, 1).mt_rand(999,9999);
     }
 }

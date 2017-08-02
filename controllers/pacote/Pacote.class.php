@@ -1,6 +1,6 @@
 <?php
 
-class Pacote
+class Pacote extends Cupom
 {
     private $Dados;
     private $ID;
@@ -53,7 +53,7 @@ class Pacote
     private function setpacote(){
 
         $Usuario = new Exibir();
-        $Usuario->exeExibir("SELECT id_usuario FROM usuario WHERE codigo = :id", NULL, NULL,"id={$this->Dados['usuario_id']}", FALSE);
+        $Usuario->exeExibir("SELECT id_usuario, nome, sobrenome FROM usuario WHERE codigo = :id", NULL, NULL,"id={$this->Dados['usuario_id']}", FALSE);
 
         $Dados = [
             "id_usuario" => $Usuario->Resultado()[0]["id_usuario"],
@@ -67,6 +67,26 @@ class Pacote
             $this->Retorno = json_encode(["codigo" => $setPack->errorCode()]);
         else:
             $this->Retorno = json_encode(["codigo" => "200"]);
+
+            $Cupom = new Exibir();
+            $Cupom->exeExibir("SELECT id_oferta FROM oferta WHERE id_pacote = :pacote", NULL, NULL, "pacote={$this->Dados['pacote_id']}", FALSE);
+
+            $iniSobrenome = NULL;
+
+            foreach(explode(" ", $Usuario->Resultado()[0]["sobrenome"]) as $Value):
+                if($Value <> "de"):
+                    $iniSobrenome .= substr($Value, 0 , 1);
+                endif;
+            endforeach;
+
+            for($a=0;$a < count($Cupom->Resultado()); $a++):
+
+                $hash = sha1($this->Dados['usuario_id'].date("dmYHis").$Cupom->Resultado()[$a]["id_oferta"]);
+                $altQRCode = strtoupper(substr($Usuario->Resultado()[0]["nome"], 0 , 1).$iniSobrenome.substr($this->Dados['usuario_id'],0 , 3).substr($hash,0, 3));
+
+                Cupom::setcupom(["iduser" => $Usuario->Resultado()[0]["id_usuario"], "codpack" => $this->Dados['pacote_id'], "codcupom" => $Cupom->Resultado()[$a]["id_oferta"], "hash" => $hash, "altcode" => $altQRCode]);
+
+            endfor;
         endif;
     }
 }

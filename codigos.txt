@@ -14,3 +14,6 @@ Genéricos
     100 => Reprovado.
     200 => Aprovado.
     300 => Sem dados.
+    23000 => Restrição de CONSTRAINT de KEY (Database)
+    42S02 => Erro de coluna, inválida
+    42S22 => Erro de tabela, inválida
