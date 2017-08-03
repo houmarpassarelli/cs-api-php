@@ -82,6 +82,7 @@ class System extends Conexao
                         "getcupomperpack" => "910572e3f281348ce7807952e993fada",
                         "getcupomperuser" => "7d370f49aeaf1473b44755d8b0158003",
                         "putcupom" => "e2f189e0949db9308441953db5293a72",
+                        "putcupommercado" => "20149dabb2f9cb57b0ed23e916417a3b",
                         "updatecupom" => "cb1219577315b48fba401a166f4c99c0",
                         "deletecupom" => "5a7ce680226189faf51dce0b5419b77a",
                         "login" => "d56b699830e77ba53855679cb1d252da",

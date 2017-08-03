@@ -90,18 +90,42 @@ class Cupom
         $perUser = new Exibir();
         $perUser->exeExibir("SELECT
                                     o.codigo,  
-                                    o.titulo,
-                                    o.descricao,
+                                    o.titulo AS titulo_cupom,
+                                    o.descricao AS descricao_cupom,
                                     o.min_pessoas,
                                     o.max_pessoas,
                                     o.validade,
-                                    o.img AS IMG_MAIN,
+                                    o.img AS img_cupom,
                                     i.altcode,
-                                    i.qrcode
+                                    i.qrcode,
+                                    e.titulo AS titulo_parceiro,
+                                    e.logo AS img_parceiro,
+                                    e.descritivo AS descricao_parceiro
                                     FROM oferta o
                                     INNER JOIN oferta_interacao i ON i.id_oferta = o.id_oferta
+                                    JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
                                     WHERE i.id_usuario = (SELECT id_usuario FROM usuario WHERE codigo = :codigo)", NULL, NULL, "codigo={$this->ID}", FALSE);
 
         $this->Retorno = json_encode($perUser->Resultado());
+    }
+
+    private function putcupommercado(){
+
+        $Dados = new Exibir();
+        $Dados->exeExibir("SELECT o.id_oferta, u.id_usuario FROM oferta o
+                                    JOIN usuario u ON u.codigo = :usuario
+                                    WHERE o.codigo = :oferta", NULL, NULL, "usuario={$this->Dados['usercode']}&oferta={$this->Dados['cupomcode']}", FALSE);
+
+        if($Dados->Resultado()):
+
+            $Inserir = new Inserir();
+            $Inserir->exeInserir("oferta_mercado", $Dados->Resultado()[0]);
+
+            if($Inserir->errorCode() == '23000' || $Inserir->errorCode() == '42S02' || $Inserir->errorCode() == '42S22'):
+                $this->Retorno = json_encode(["codigo" => $Inserir->errorCode()]);
+            else:
+                $this->Retorno = json_encode(["codigo" => "200"]);
+            endif;
+        endif;
     }
 }

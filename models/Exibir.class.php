@@ -94,7 +94,8 @@ class Exibir extends Conexao {
                 $this->Exibir = $this->Conexao->prepare("SELECT * FROM {$this->Tabela} {$this->Condicoes}");
             elseif($this->Coluna && $this->Tabela):
                 $this->Exibir = $this->Conexao->prepare("SELECT {$this->Coluna} FROM {$this->Tabela} {$this->Condicoes}");
-            elseif($this->Manual && !empty($this->Tabela) || !empty($this->Manual) && !$this->Tabela):
+            //elseif($this->Manual && !empty($this->Tabela) || !empty($this->Manual) && !$this->Tabela):
+            elseif((!empty($this->Manual) && (empty($this->Tabela) || is_null($this->Tabela) || $this->Tabela == FALSE))):
                 $this->Exibir = $this->Conexao->prepare($this->Manual);
             else:
                 $this->Exibir = $this->Conexao->prepare("SELECT * FROM {$this->Tabela}");
@@ -105,7 +106,7 @@ class Exibir extends Conexao {
             else:
                 $this->Exibir->setFetchMode(PDO::FETCH_ASSOC);
             endif;
-            echo $this->Termo();
+
             $this->Exibir->execute($this->Termo());
             $this->Resultado = $this->Exibir->fetchAll();
 
