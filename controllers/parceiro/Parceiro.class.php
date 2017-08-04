@@ -11,11 +11,15 @@ class Parceiro extends Conexao
     private $Retorno;
     private $Dados;
     private $ID;
+    private $LIMITE;
+    private $OFFSET;
 
     public function Retorno(array $dados){
 
         $this->Dados = $dados["DADOS"] ?? NULL;
         $this->ID = $dados["ID"] ?? NULL;
+        $this->LIMITE = $dados["LIMIT"] ?? NULL;
+        $this->OFFSET = $dados["OFFSET"] ?? NULL;
         $this->{$dados["METODO"]}();
 
         return $this->Retorno;

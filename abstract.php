@@ -90,3 +90,16 @@ class callContato{
         return $this->Output;
     }
 }
+
+class callImagem{
+    private $Output;
+
+    public function __construct(array $dados)
+    {
+        $this->Output = (new Imagem())->Retorno($dados);
+    }
+
+    public function Resultado(){
+        return $this->Output;
+    }
+}

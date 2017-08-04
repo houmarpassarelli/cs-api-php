@@ -12,11 +12,15 @@ class Cupom
     private $Dados;
     private $ID;
     private $Codigo;
+    private $LIMITE;
+    private $OFFSET;
 
     public function Retorno(array $dados){
 
         $this->Dados = $dados["DADOS"] ?? NULL;
         $this->ID = $dados["ID"] ?? NULL;
+        $this->LIMITE = $dados["LIMIT"] ?? NULL;
+        $this->OFFSET = $dados["OFFSET"] ?? NULL;
         $this->{$dados["METODO"]}();
 
         return $this->Retorno;
@@ -71,21 +75,48 @@ class Cupom
 
     private function getcupomperpack(){
 
+        $Condicoes = '';
+        $Parse = '';
+
+        if(!empty($this->LIMITE)):
+            $Condicoes .= "LIMIT :limit ";
+            $Parse .= "&limit={$this->LIMITE}";
+        endif;
+
+        if(!empty($this->OFFSET)):
+            $Condicoes .= "OFFSET :offset ";
+            $Parse .= "&offset={$this->OFFSET}";
+        endif;
+
         $perPack = new Exibir();
         $perPack->exeExibir("SELECT
+                                    o.id_oferta,
                                     o.codigo AS id_cupom,
                                     o.titulo AS titulo_cupom,
-                                    o.img AS img_cupom,
-                                    e.titulo AS titulo_parceiro,
-                                    e.logo AS img_parceiro
+                                    /*o.img AS img_cupom,*/
+                                    e.titulo AS titulo_parceiro
+                                    /*e.logo AS img_parceiro*/
                                     FROM oferta o
                                     LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
-                                    WHERE id_pacote = :id", NULL, NULL, "id={$this->ID}", FALSE);
+                                    WHERE id_pacote = :id {$Condicoes}", NULL, NULL, "id={$this->ID}{$Parse}", FALSE);
 
         $this->Retorno = json_encode($perPack->Resultado());
     }
 
     private function getcupomperuser(){
+
+        $Condicoes = '';
+        $Parse = '';
+
+        if(!empty($this->LIMITE)):
+            $Condicoes .= "LIMIT :limit ";
+            $Parse .= "&limit={$this->LIMITE}";
+        endif;
+
+        if(!empty($this->OFFSET)):
+            $Condicoes .= "OFFSET :offset ";
+            $Parse .= "&offset={$this->OFFSET}";
+        endif;
 
         $perUser = new Exibir();
         $perUser->exeExibir("SELECT
@@ -104,7 +135,7 @@ class Cupom
                                     FROM oferta o
                                     INNER JOIN oferta_interacao i ON i.id_oferta = o.id_oferta
                                     JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
-                                    WHERE i.id_usuario = (SELECT id_usuario FROM usuario WHERE codigo = :codigo)", NULL, NULL, "codigo={$this->ID}", FALSE);
+                                    WHERE i.id_usuario = (SELECT id_usuario FROM usuario WHERE codigo = :codigo) {$Condicoes}", NULL, NULL, "codigo={$this->ID}{$Parse}", FALSE);
 
         $this->Retorno = json_encode($perUser->Resultado());
     }
@@ -126,6 +157,29 @@ class Cupom
             else:
                 $this->Retorno = json_encode(["codigo" => "200"]);
             endif;
+        endif;
+    }
+
+    private function putcupomrating(){
+
+        $Exibir = new Exibir();
+        $Exibir->exeExibir("SELECT o.id_oferta, u.id_usuario FROM oferta o
+                                    JOIN usuario u ON u.codigo = :usuario
+                                    WHERE o.codigo = :oferta", NULL,NULL,"usuario={$this->Dados['usercode']}&oferta={$this->Dados['cupomcode']}", FALSE);
+
+        $Dados = [
+                    "id_oferta" =>  $Exibir->Resultado()[0]["id_oferta"],
+                    "id_usuario" => $Exibir->Resultado()[0]["id_usuario"],
+                    "rating" => $this->Dados["rating"]
+                ];
+
+        $Inserir = new Inserir();
+        $Inserir->exeInserir("oferta_rating", $Dados);
+
+        if($Inserir->Resultado()):
+            $this->Retorno = json_encode(["codigo" => "200"]);
+        else:
+            $this->Retorno = json_encode(["codigo" => "100"]);
         endif;
     }
 }

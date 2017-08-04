@@ -83,6 +83,7 @@ class System extends Conexao
                         "getcupomperuser" => "7d370f49aeaf1473b44755d8b0158003",
                         "putcupom" => "e2f189e0949db9308441953db5293a72",
                         "putcupommercado" => "20149dabb2f9cb57b0ed23e916417a3b",
+                        "putcupomrating" => "5ca6eb852234e7d4bf020273bdd11ce2",
                         "updatecupom" => "cb1219577315b48fba401a166f4c99c0",
                         "deletecupom" => "5a7ce680226189faf51dce0b5419b77a",
                         "login" => "d56b699830e77ba53855679cb1d252da",
@@ -97,7 +98,9 @@ class System extends Conexao
                         "getcontato" => "e3c1501305ee0d32e71bb89477376fa0",
                         "putcontato" => "0c6ed687d54ffc4b7c1df5ccbe6c6e30",
                         "updatecontato" => "",
-                        "deletecontato" => ""
+                        "deletecontato" => "",
+                        "imagem" => "bf19122987928493131d5bf846637fbc",
+                        "putimagem" => "c99a3febab0c09597b6dd62a1ba25cb7"
                     ];
      
        

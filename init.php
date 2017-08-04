@@ -9,6 +9,10 @@ $dados = json_decode($input, true);
 $request = (new System())->Request($_SERVER['REQUEST_URI']);
 $output = NULL;
 
+var_dump($input);
+//var_dump($_FILES);
+var_dump(getimagesize($_FILES['arquivo']['tmp_name']));
+
 if(!empty($request["PATH"][2])):
     switch ((new System())->URI_COMPARE($request["PATH"][2])):
         case "usuario" :
@@ -22,7 +26,7 @@ if(!empty($request["PATH"][2])):
                     $output = (new callUsuario([
                                                 "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
                                                 "ID" => $request["PATH"][4],
-                                                "DADOS" => $teste3
+                                                "DADOS" => ""
                                             ]))->Resultado();
                 elseif($request["METHOD"] == 'DELETE'):
                     $output = 'DELETE';
@@ -42,20 +46,22 @@ if(!empty($request["PATH"][2])):
             if(!empty($request["PATH"][3])):
                 if($request["METHOD"] == 'GET'):
                     @$output = (new callCupom([
-                                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
-                                                "ID" => $request["PATH"][4]
-                                            ]))->Resultado();
+                        "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                        "ID" => $request["PATH"][4],
+                        "LIMIT" => $request["PATH"][5],
+                        "OFFSET" => $request["PATH"][6]
+                    ]))->Resultado();
                 elseif($request["METHOD"] == "POST"):
                     $output = (new callCupom([
-                                            "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
-                                            "DADOS" => $dados
-                                ]))->Resultado();
+                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                                "DADOS" => $dados
+                    ]))->Resultado();
                 elseif($request["METHOD"] == 'PUT'):
                     $output = (new callCupom([
-                                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
-                                                "ID" => $request["PATH"][4],
-                                                "DADOS" => $teste2
-                                ]))->Resultado();
+                            "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                            "ID" => $request["PATH"][4],
+                            "DADOS" => ""
+                    ]))->Resultado();
                 elseif($request["METHOD"] == 'DELETE'):
                     $output = 'UPDATE';
                 endif;
@@ -75,7 +81,9 @@ if(!empty($request["PATH"][2])):
                 if($request["METHOD"] == 'GET'):
                     @$output = (new callParceiro([
                                     "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
-                                    "ID" => $request["PATH"][4]
+                                    "ID" => $request["PATH"][4],
+                                    "LIMIT" => $request["PATH"][5],
+                                    "OFFSET" => $request["PATH"][6]
                                 ]))->Resultado();
                 elseif($request["METHOD"] == 'PUT'):
                     $output = 'PUT';
@@ -156,6 +164,16 @@ if(!empty($request["PATH"][2])):
                                                 "DADOS" => $dados
                                 ]))->Resultado();
                 endif;
+            endif;
+            break;
+        case 'imagem':
+            if(!empty($request["PATH"][3])):
+
+            else:
+                @$output = (new callImagem([
+                    "METODO" => (new System())->URI_COMPARE("c99a3febab0c09597b6dd62a1ba25cb7"),
+                    "DADOS" => $input
+                ]))->Resultado();
             endif;
             break;
     endswitch;

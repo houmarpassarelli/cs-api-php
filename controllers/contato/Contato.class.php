@@ -25,9 +25,9 @@ class Contato
         $Inserir->exeInserir("usuario_contato", $Dados);
 
         if($Inserir->Resultado()):
-            $this->Retorno = '200';
+            $this->Retorno = json_encode(['codigo' =>'200']);
         else:
-            $this->Retorno = '100';
+            $this->Retorno = json_encode(['codigo' =>'100']);;
         endif;
 
     }

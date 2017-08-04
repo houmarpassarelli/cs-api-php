@@ -33,16 +33,22 @@ require ('config.inc.php');
 //endfor;
 
 
-$Dados = ["id_oferta" => 1, "id_estabelecimento" => "'(select id_usuario from usuario where codigo = '240597002571')'"];
+//$Dados = ["id_oferta" => 1, "id_estabelecimento" => "'(select id_usuario from usuario where codigo = '240597002571')'"];
+//
+//$Inserir = new Inserir();
+//$Inserir->exeInserir("tag_interacao", $Dados);
+//
+//
+//if($Inserir->errorCode()):
+//    echo 'erro: '.$Inserir->errorCode();
+//else:
+//    echo 'certo: '.$Inserir->Resultado();
+//endif;
 
-$Inserir = new Inserir();
-$Inserir->exeInserir("tag_interacao", $Dados);
+?>
 
-
-if($Inserir->errorCode()):
-    echo 'erro: '.$Inserir->errorCode();
-else:
-    echo 'certo: '.$Inserir->Resultado();
-endif;
-
+<form method="post" action="http://10.0.3.32:8080/cs_api/bf19122987928493131d5bf846637fbc" enctype="multipart/form-data">
+    <input type="file" name="arquivo" />
+    <input type="submit" name="Enviar" />
+</form>
 

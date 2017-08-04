@@ -79,7 +79,7 @@ class Exibir extends Conexao {
         if($this->Termos):
             foreach($this->Termos as $Key=>$Value):
                 if ($Key == 'limit' || $Key == 'offset'):
-                    $Value = (int) $Value;
+                    $Value = (int)$Value;
                 endif;
                 $this->Exibir->bindValue(":{$Key}", $Value,(is_int($Value ? PDO::PARAM_INT : PDO::PARAM_STR)));
             endforeach;
