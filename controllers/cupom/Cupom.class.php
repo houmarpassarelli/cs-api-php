@@ -26,7 +26,7 @@ class Cupom
         return $this->Retorno;
     }
 
-    static protected function setcupom(array $dados){
+    static protected function setcupomuser(array $dados){
 
         $Inserir = new Inserir();
         $Inserir->exeInserir("oferta_interacao", ["id_pacote" => $dados["codpack"], "id_usuario" => $dados["iduser"], "id_oferta" => $dados["codcupom"], "hash" => $dados["hash"], "altcode" => $dados["altcode"]]);
@@ -46,6 +46,11 @@ class Cupom
 
     private function putcupom(){
 
+        $this->Dados["codigo"] = System::longRandnDateCode();
+        $this->Dados["dias_uso"] = serialize($this->Dados["dias_uso"]);
+
+        $Inserir = new Inserir();
+        $Inserir->exeInserir("oferta", $this->Dados);
     }
 
     private function updatecupom(){
@@ -93,9 +98,9 @@ class Cupom
                                     o.id_oferta,
                                     o.codigo AS id_cupom,
                                     o.titulo AS titulo_cupom,
-                                    /*o.img AS img_cupom,*/
+                                    o.img AS img_cupom,
                                     e.titulo AS titulo_parceiro
-                                    /*e.logo AS img_parceiro*/
+                                    e.logo AS img_parceiro
                                     FROM oferta o
                                     LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
                                     WHERE id_pacote = :id {$Condicoes}", NULL, NULL, "id={$this->ID}{$Parse}", FALSE);

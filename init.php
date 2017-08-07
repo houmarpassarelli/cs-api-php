@@ -9,9 +9,9 @@ $dados = json_decode($input, true);
 $request = (new System())->Request($_SERVER['REQUEST_URI']);
 $output = NULL;
 
-var_dump($input);
+//var_dump($input);
 //var_dump($_FILES);
-var_dump(getimagesize($_FILES['arquivo']['tmp_name']));
+//var_dump(getimagesize($_FILES['arquivo']['tmp_name']));
 
 if(!empty($request["PATH"][2])):
     switch ((new System())->URI_COMPARE($request["PATH"][2])):

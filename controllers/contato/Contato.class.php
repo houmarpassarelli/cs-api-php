@@ -50,4 +50,27 @@ class Contato
             $this->Retorno = json_encode($Exibir->Resultado());
         endif;
     }
+
+    private function searchcontato(){
+
+        $Exibir = new Exibir();
+        $Exibir->exeExibir("SELECT 
+                                    u.codigo AS id,
+                                    u.avatar,
+                                    u.nome,
+                                    u.sobrenome,
+                                    u.email
+                                    FROM usuario u
+                                    WHERE (u.nome LIKE '%{$this->Dados['contactsearch']}%' OR u.email LIKE '%{$this->Dados['contactsearch']}%') AND u.visivel = 'S'");
+
+        if($Exibir->Resultado()):
+            $this->Retorno = json_encode($Exibir->Resultado());
+        else:
+            $this->Retorno = json_encode(["codigo" => "0401"]);
+        endif;
+    }
+
+    private function deletecontato(){
+
+    }
 }

@@ -8,7 +8,7 @@
 03 - Pacote:
     0301 => Nome duplicado
 04 - Contato
-    0401 =>
+    0401 => Contato não encontrado
 
 Genéricos
     100 => Reprovado.

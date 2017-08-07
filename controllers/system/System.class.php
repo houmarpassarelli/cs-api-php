@@ -96,6 +96,7 @@ class System extends Conexao
                         "setpacote" => "a9e250a864dc3526e8b4b947685a781b",
                         "contato" => "b5f06e72d6d5104bdae7736fd0786d9c",
                         "getcontato" => "e3c1501305ee0d32e71bb89477376fa0",
+                        "searchcontato" => "d0e4cb0eca3b41ca861090b884a337c6",
                         "putcontato" => "0c6ed687d54ffc4b7c1df5ccbe6c6e30",
                         "updatecontato" => "",
                         "deletecontato" => "",
