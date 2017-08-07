@@ -136,13 +136,17 @@ class Cupom
                                     i.qrcode,
                                     e.titulo AS titulo_parceiro,
                                     e.logo AS img_parceiro,
-                                    e.descritivo AS descricao_parceiro
+                                    e.descricao AS descricao_parceiro
                                     FROM oferta o
                                     INNER JOIN oferta_interacao i ON i.id_oferta = o.id_oferta
                                     JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
                                     WHERE i.id_usuario = (SELECT id_usuario FROM usuario WHERE codigo = :codigo) {$Condicoes}", NULL, NULL, "codigo={$this->ID}{$Parse}", FALSE);
 
         $this->Retorno = json_encode($perUser->Resultado());
+    }
+
+    private function getcupomonmarket(){
+
     }
 
     private function putcupommercado(){

@@ -172,7 +172,7 @@ if(!empty($request["PATH"][2])):
             else:
                 @$output = (new callImagem([
                     "METODO" => (new System())->URI_COMPARE("c99a3febab0c09597b6dd62a1ba25cb7"),
-                    "DADOS" => $input
+                    "DADOS" => ""
                 ]))->Resultado();
             endif;
             break;

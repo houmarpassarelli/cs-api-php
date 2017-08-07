@@ -2,6 +2,7 @@
 
 require ('config.inc.php');
 
+echo md5('getcupomonmarket');
 
 //$Exibir = new Exibir();
 //$Exibir->exeExibir("SELECT u.id_usuario, u.nome, u.sobrenome, u.codigo FROM usuario u
@@ -47,8 +48,8 @@ require ('config.inc.php');
 
 ?>
 
-<form method="post" action="http://10.0.3.32:8080/cs_api/bf19122987928493131d5bf846637fbc" enctype="multipart/form-data">
-    <input type="file" name="arquivo" />
-    <input type="submit" name="Enviar" />
-</form>
+<!--<form method="post" action="http://10.0.3.32:8080/cs_api/bf19122987928493131d5bf846637fbc" enctype="multipart/form-data">-->
+<!--    <input type="file" name="arquivo" />-->
+<!--    <input type="submit" name="Enviar" />-->
+<!--</form>-->
 
