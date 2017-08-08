@@ -1,55 +1,42 @@
 <?php
+/**
+ * @filesource   example.php
+ * @created      10.12.2015
+ * @author       Smiley <smiley@chillerlan.net>
+ * @copyright    2015 Smiley
+ * @license      MIT
+ */
 
-require ('config.inc.php');
+//require_once '../vendor/autoload.php';
 
-echo md5('getcupomonmarket');
+require('config.inc.php');
 
-//$Exibir = new Exibir();
-//$Exibir->exeExibir("SELECT u.id_usuario, u.nome, u.sobrenome, u.codigo FROM usuario u
-//                            LEFT JOIN cupom_interacao c ON
-//                            WHERE codigo = '220071846355'", NULL, NULL, NULL, FALSE);
+use chillerlan\QRCode\Output\QRImage;
+use chillerlan\QRCode\Output\QRImageOptions;
+use chillerlan\QRCode\QRCode;
 
-//$sobrenome = ;
+$qrImageOptions = new QRImageOptions;
+$qrImageOptions->pixelSize = 8;
+$qrImageOptions->base64 = true;
+//$qrImageOptions->cachefile = 'example_image.png';
 
+//$teste = new QRCode('teste', new QRImage($qrImageOptions));
+//var_dump($teste->output());
+//echo '<img src="'.(new QRCode('teste', new QRImage($qrImageOptions)))->output().'" />';
 
-
-//$implode = implode("");
-
-//$Valor = NULL;
-//
-//foreach (explode(" ", $Exibir->Resultado()[0]["sobrenome"]) as $Value):
-//        if($Value <> "de"):
-//            $Valor .= substr($Value,0,1);
-//        endif;
-//endforeach;
-
-//echo $Valor;
-
-//echo strtoupper(substr($Exibir->Resultado()[0]["nome"], 0, 1).$Valor.substr($Exibir->Resultado()[0]["codigo"],0,3));
-
-//print_r($Exibir->Resultado());
-
-//for($i=0;$i<count($Exibir->Resultado());$i++):
-//    echo $Exibir->Resultado()[$i]["id_oferta"];
-//endfor;
+$Exibir = new Exibir();
+$Exibir->exeExibir(NULL, "oferta_interacao", NULL, NULL, FALSE);
 
 
-//$Dados = ["id_oferta" => 1, "id_estabelecimento" => "'(select id_usuario from usuario where codigo = '240597002571')'"];
-//
-//$Inserir = new Inserir();
-//$Inserir->exeInserir("tag_interacao", $Dados);
-//
-//
-//if($Inserir->errorCode()):
-//    echo 'erro: '.$Inserir->errorCode();
-//else:
-//    echo 'certo: '.$Inserir->Resultado();
-//endif;
 
-?>
+//$Alterar = new Alterar();
 
-<!--<form method="post" action="http://10.0.3.32:8080/cs_api/bf19122987928493131d5bf846637fbc" enctype="multipart/form-data">-->
-<!--    <input type="file" name="arquivo" />-->
-<!--    <input type="submit" name="Enviar" />-->
-<!--</form>-->
+for($i=0; $i < count($Exibir->Resultado()); $i++){
+
+    //$base64 = (new QRCode($Exibir->Resultado()[$i]["hash"].$Exibir->Resultado()[$i]["altcode"], new QRImage($qrImageOptions)))->output();
+
+    //$Alterar->ExeAlterar(NULL, "oferta_interacao", ["qrcode" => $base64] , "WHERE id_oferta_interacao = :id", "id={$Exibir->Resultado()[$i]['id_oferta_interacao']}");
+
+    echo '<img src="'.$Exibir->Resultado()[$i]["qrcode"].'" />';
+}
 

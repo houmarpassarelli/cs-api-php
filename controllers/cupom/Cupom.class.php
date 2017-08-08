@@ -29,7 +29,7 @@ class Cupom
     static protected function setcupomuser(array $dados){
 
         $Inserir = new Inserir();
-        $Inserir->exeInserir("oferta_interacao", ["id_pacote" => $dados["codpack"], "id_usuario" => $dados["iduser"], "id_oferta" => $dados["codcupom"], "hash" => $dados["hash"], "altcode" => $dados["altcode"]]);
+        $Inserir->exeInserir("oferta_interacao", ["id_pacote" => $dados["codpack"], "id_usuario" => $dados["iduser"], "id_oferta" => $dados["codcupom"], "hash" => $dados["hash"], "altcode" => $dados["altcode"], "qrcode" => $dados["qrcode"]]);
     }
 
     private function getcupom(){
@@ -189,7 +189,7 @@ class Cupom
         $this->Retorno = json_encode($Exibir->Resultado());
     }
 
-    private function putcupommercado(){
+    private function putcupommarket(){
 
         $Dados = new Exibir();
         $Dados->exeExibir("SELECT o.id_oferta, u.id_usuario FROM oferta o

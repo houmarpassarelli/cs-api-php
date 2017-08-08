@@ -31,26 +31,4 @@ abstract class Conexao {
    protected function getCon(){
        return $this->Conecta();
    }
-    // private $instancia = NULL;
-
-    // private function Conecta(){
-    //     try{
-    //         if($this->instancia == NULL):
-    //             $this->instancia = new MongoDB\Client("mongodb://localhost:27017");
-    //         endif;
-    //     }catch(MongoException $erro){
-    //         echo '<pre>';
-    //         echo $erro->getCode();
-    //         echo $erro->getFile();
-    //         echo $erro->getLine();
-    //         echo $erro->getMessage();
-    //         echo '</pre>';
-    //     }
-
-    //     return $this->instancia;
-    // }
-
-    // protected function getCon(){
-    //     return $this->Conecta();
-    // }
 }

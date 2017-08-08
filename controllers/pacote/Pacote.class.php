@@ -1,5 +1,9 @@
 <?php
 
+use chillerlan\QRCode\Output\QRImage;
+use chillerlan\QRCode\Output\QRImageOptions;
+use chillerlan\QRCode\QRCode;
+
 class Pacote extends Cupom
 {
     private $Dados;
@@ -73,6 +77,10 @@ class Pacote extends Cupom
 
             $iniSobrenome = NULL;
 
+            $qrImageOptions = new QRImageOptions;
+            $qrImageOptions->pixelSize = 8;
+            $qrImageOptions->base64 = true;
+
             foreach(explode(" ", $Usuario->Resultado()[0]["sobrenome"]) as $Value):
                 if($Value <> "de"):
                     $iniSobrenome .= substr($Value, 0 , 1);
@@ -83,8 +91,9 @@ class Pacote extends Cupom
 
                 $hash = sha1($this->Dados['usuario_id'].date("dmYHis").$Cupom->Resultado()[$a]["id_oferta"]);
                 $altQRCode = strtoupper(substr($Usuario->Resultado()[0]["nome"], 0 , 1).$iniSobrenome.substr($this->Dados['usuario_id'],0 , 3).substr($hash,0, 3));
+                $qrcode = (new QRCode($hash.$altQRCode, new QRImage($qrImageOptions)))->output();
 
-                Cupom::setcupomuser(["iduser" => $Usuario->Resultado()[0]["id_usuario"], "codpack" => $this->Dados['pacote_id'], "codcupom" => $Cupom->Resultado()[$a]["id_oferta"], "hash" => $hash, "altcode" => $altQRCode]);
+                Cupom::setcupomuser(["iduser" => $Usuario->Resultado()[0]["id_usuario"], "codpack" => $this->Dados['pacote_id'], "codcupom" => $Cupom->Resultado()[$a]["id_oferta"], "hash" => $hash, "altcode" => $altQRCode, "qrcode" => $qrcode]);
 
             endfor;
         endif;

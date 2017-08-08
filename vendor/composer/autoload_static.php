@@ -4,31 +4,27 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit36d3fd103563f039f2f2632c711c3c71
+class ComposerStaticInite60a10c833101f2f26e0d2c9c32a261b
 {
-    public static $files = array (
-        '3a37ebac017bc098e9a86b35401e7a68' => __DIR__ . '/..' . '/mongodb/mongodb/src/functions.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
-        'M' => 
+        'c' => 
         array (
-            'MongoDB\\' => 8,
+            'chillerlan\\QRCode\\' => 18,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'MongoDB\\' => 
+        'chillerlan\\QRCode\\' => 
         array (
-            0 => __DIR__ . '/..' . '/mongodb/mongodb/src',
+            0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
         ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit36d3fd103563f039f2f2632c711c3c71::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit36d3fd103563f039f2f2632c711c3c71::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite60a10c833101f2f26e0d2c9c32a261b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite60a10c833101f2f26e0d2c9c32a261b::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }
