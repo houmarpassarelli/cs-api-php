@@ -99,7 +99,7 @@ class Cupom
                                     o.codigo AS id_cupom,
                                     o.titulo AS titulo_cupom,
                                     o.img AS img_cupom,
-                                    e.titulo AS titulo_parceiro
+                                    e.titulo AS titulo_parceiro,
                                     e.logo AS img_parceiro
                                     FROM oferta o
                                     LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
