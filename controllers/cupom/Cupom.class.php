@@ -153,6 +153,7 @@ class Cupom
         $this->Retorno = json_encode($perUser->Resultado());
     }
 
+
     private function getcupomonmarket(){
 
         $Exibir = new Exibir();
