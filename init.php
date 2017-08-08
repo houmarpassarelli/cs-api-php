@@ -22,6 +22,11 @@ if(!empty($request["PATH"][2])):
                                                 "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
                                                 "ID" => $request["PATH"][4]
                                             ]))->Resultado();
+                elseif($request["METHOD"] == 'POST'):
+                    $output = (new callUsuario([
+                                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                                                "DADOS" => $dados
+                                            ]))->Resultado();
                 elseif($request["METHOD"] == 'PUT'):
                     $output = (new callUsuario([
                                                 "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),

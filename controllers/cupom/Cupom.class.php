@@ -136,10 +136,14 @@ class Cupom
                                     i.qrcode,
                                     e.titulo AS titulo_parceiro,
                                     e.logo AS img_parceiro,
-                                    e.descricao AS descricao_parceiro
+                                    e.descricao AS descricao_parceiro,
+                                    CASE WHEN m.id_oferta IS NOT NULL THEN 'S' ELSE 'N' END AS mercado
+                                    ROUND(AVG(r.rating)) AS rating
                                     FROM oferta o
                                     INNER JOIN oferta_interacao i ON i.id_oferta = o.id_oferta
                                     JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
+                                    LEFT JOIN oferta_mercado m ON m.id_oferta = o.id_oferta
+                                    LEFT JOIN oferta_rating r ON r.id_oferta = o.id_oferta
                                     WHERE i.id_usuario = (SELECT id_usuario FROM usuario WHERE codigo = :codigo) {$Condicoes}", NULL, NULL, "codigo={$this->ID}{$Parse}", FALSE);
 
         $this->Retorno = json_encode($perUser->Resultado());
@@ -159,6 +163,24 @@ class Cupom
                                     JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
                                     JOIN usuario u ON u.id_usuario = m.id_usuario
                                     WHERE m.pendente = 'N' AND m.id_usuario_sugestao IS NULL", NULL, NULL, NULL, FALSE);
+
+        $this->Retorno = json_encode($Exibir->Resultado());
+    }
+
+    private function getcupomonmarketperuse(){
+
+    }
+
+    private function getcupomcomment(){
+
+        $Exibir = new Exibir();
+        $Exibir->exeExibir("SELECT 
+                                    u.nome + ' ' + u.sobrenome AS nome,
+                                    u.avatar AS img_usuario,
+                                    c.comentario
+                                    FROM usuario_comentario c
+                                    JOIN usuario u ON u.id_usuario = c.id_usuario
+                                    WHERE c.id_oferta = (SELECT id_oferta FROM oferta WHERE codigo = :codigo)", NULL, NULL, "codigo={$this->ID}", FALSE);
 
         $this->Retorno = json_encode($Exibir->Resultado());
     }

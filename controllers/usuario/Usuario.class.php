@@ -125,4 +125,38 @@ class Usuario extends Conexao
             $this->Retorno = 0;
         endif;
     }
+
+    private function putusuariocomentario(){
+
+        $Dados = NULL;
+        $Exibir = new Exibir();
+
+        if($this->Dados['target'] == 'oferta'):
+
+            $Exibir->exeExibir("SELECT u.id_usuario, o.id_oferta FROM usuario u
+                                        JOIN oferta o ON o.codigo = :oferta
+                                        WHERE u.codigo = :usuario", NULL, NULL, "usuario={$this->Dados['usercode']}&oferta={$this->Dados['cupomcode']}", FALSE);
+
+            $Dados = [
+                        "id_usuario" => $Exibir->Resultado()[0]["id_usuario"],
+                        "id_oferta" => $Exibir->Resultado()[0]["id_oferta"],
+                        "comentario" => $this->Dados["comment"]
+                    ];
+        else:
+            $Exibir->exeExibir("SELECT id_usuario FROM usuario
+                                        WHERE codigo = :codigo", NULL, NULL, "codigo={$this->Dados['usercode']}", FALSE);
+            $Dados = [
+                        "id_usuario" => $Exibir->Resultado()[0]["id_usuario"],
+                        "id_estabelecimento" => $this->Dados['partnercode'],
+                        "comentario" => $this->Dados['comment']
+                    ];
+        endif;
+
+        $Inserir = new Inserir();
+        $Inserir->exeInserir("usuario_comentario", $Dados);
+
+//        if($Inserir->Resultado()):
+//
+//        endif;
+    }
 }
