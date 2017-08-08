@@ -137,13 +137,15 @@ class Cupom
                                     e.titulo AS titulo_parceiro,
                                     e.logo AS img_parceiro,
                                     e.descricao AS descricao_parceiro,
-                                    CASE WHEN m.id_oferta IS NOT NULL THEN 'S' ELSE 'N' END AS mercado
-                                    ROUND(AVG(r.rating)) AS rating
+                                    CASE WHEN m.id_oferta IS NOT NULL THEN 'S' ELSE 'N' END AS mercado,
+                                    ROUND(AVG(r.rating)) AS rating,
+                                    COUNT(uc.id_oferta) AS qtd_comentario
                                     FROM oferta o
                                     INNER JOIN oferta_interacao i ON i.id_oferta = o.id_oferta
                                     JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
                                     LEFT JOIN oferta_mercado m ON m.id_oferta = o.id_oferta
                                     LEFT JOIN oferta_rating r ON r.id_oferta = o.id_oferta
+                                    LEFT JOIN usuario_comentario uc ON uc.id_oferta = o.id_oferta
                                     WHERE i.id_usuario = (SELECT id_usuario FROM usuario WHERE codigo = :codigo) {$Condicoes}", NULL, NULL, "codigo={$this->ID}{$Parse}", FALSE);
 
         $this->Retorno = json_encode($perUser->Resultado());

@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b20389c8-0356-4628-9ad2-0e62a4515980" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/cupom/Cupom.class.php" afterPath="$PROJECT_DIR$/controllers/cupom/Cupom.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/system/System.class.php" afterPath="$PROJECT_DIR$/controllers/system/System.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/usuario/Usuario.class.php" afterPath="$PROJECT_DIR$/controllers/usuario/Usuario.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init.php" afterPath="$PROJECT_DIR$/init.php" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,22 +26,22 @@
         <entry file="file://$PROJECT_DIR$/controllers/cupom/Cupom.class.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="669">
-              <caret line="143" column="93" lean-forward="true" selection-start-line="143" selection-start-column="93" selection-end-line="143" selection-end-column="93" />
+              <caret line="155" column="31" lean-forward="true" selection-start-line="155" selection-start-column="31" selection-end-line="155" selection-end-column="31" />
               <folding>
-                <marker date="1502203342241" expanded="true" signature="2380:2953" ph="SELECT o.cod... oferta" />
-                <marker date="1502203342241" expanded="true" signature="2380:2954" ph="SELECT o.cod... oferta" />
-                <marker date="1502203342241" expanded="true" signature="2380:2966" ph="SELECT o.cod... oferta" />
-                <marker date="1502203342241" expanded="true" signature="2435:2895" ph="select o.cod... oferta" />
-                <marker date="1502203342241" expanded="true" signature="2592:2611" ph="/*o.img AS i... " />
-                <marker date="1502203342241" expanded="true" signature="2712:2734" ph="/*e.logo AS " />
-                <marker date="1502203342241" expanded="true" signature="3521:4918" ph="SELECT o.cod... oferta" />
-                <marker date="1502203342241" expanded="true" signature="3521:4930" ph="SELECT o.cod... oferta" />
-                <marker date="1502203342241" expanded="true" signature="4863:4916" ph="SELECT id_us... usuario" />
-                <marker date="1502203342241" expanded="true" signature="5154:5892" ph="SELECT o.cod... oferta_mercado" />
-                <marker date="1502203342241" expanded="true" signature="6145:6588" ph="SELECT u.nom... usuario_comentario" />
-                <marker date="1502203342241" expanded="true" signature="6536:6587" ph="SELECT id_of... oferta" />
-                <marker date="1502203342241" expanded="true" signature="6800:6981" ph="SELECT o.id_... oferta" />
-                <marker date="1502203342241" expanded="true" signature="7658:7839" ph="SELECT o.id_... oferta" />
+                <marker date="1502203797815" expanded="true" signature="2380:2953" ph="SELECT o.cod... oferta" />
+                <marker date="1502203797815" expanded="true" signature="2380:2954" ph="SELECT o.cod... oferta" />
+                <marker date="1502203797815" expanded="true" signature="2380:2966" ph="SELECT o.cod... oferta" />
+                <marker date="1502203797815" expanded="true" signature="2435:2895" ph="select o.cod... oferta" />
+                <marker date="1502203797815" expanded="true" signature="2592:2611" ph="/*o.img AS i... " />
+                <marker date="1502203797815" expanded="true" signature="2712:2734" ph="/*e.logo AS " />
+                <marker date="1502203797815" expanded="true" signature="3521:5092" ph="SELECT o.cod... oferta" />
+                <marker date="1502203797815" expanded="true" signature="3521:5104" ph="SELECT o.cod... oferta" />
+                <marker date="1502203797815" expanded="true" signature="5037:5090" ph="SELECT id_us... usuario" />
+                <marker date="1502203797815" expanded="true" signature="5328:6066" ph="SELECT o.cod... oferta_mercado" />
+                <marker date="1502203797815" expanded="true" signature="6319:6762" ph="SELECT u.nom... usuario_comentario" />
+                <marker date="1502203797815" expanded="true" signature="6710:6761" ph="SELECT id_of... oferta" />
+                <marker date="1502203797815" expanded="true" signature="6974:7155" ph="SELECT o.id_... oferta" />
+                <marker date="1502203797815" expanded="true" signature="7832:8013" ph="SELECT o.id_... oferta" />
               </folding>
             </state>
           </provider>
@@ -563,7 +561,7 @@
       <workItem from="1501851095081" duration="22691000" />
       <workItem from="1502122014027" duration="276000" />
       <workItem from="1502124031422" duration="241000" />
-      <workItem from="1502126965849" duration="14043000" />
+      <workItem from="1502126965849" duration="14468000" />
     </task>
     <task id="LOCAL-00001" summary="Adição de retorno para não perder a linhada">
       <created>1501536400242</created>
@@ -583,7 +581,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249336000" />
+    <option name="totallyTimeSpent" value="249761000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -1018,22 +1016,22 @@
     <entry file="file://$PROJECT_DIR$/controllers/cupom/Cupom.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="669">
-          <caret line="143" column="93" lean-forward="true" selection-start-line="143" selection-start-column="93" selection-end-line="143" selection-end-column="93" />
+          <caret line="155" column="31" lean-forward="true" selection-start-line="155" selection-start-column="31" selection-end-line="155" selection-end-column="31" />
           <folding>
-            <marker date="1502203342241" expanded="true" signature="2380:2953" ph="SELECT o.cod... oferta" />
-            <marker date="1502203342241" expanded="true" signature="2380:2954" ph="SELECT o.cod... oferta" />
-            <marker date="1502203342241" expanded="true" signature="2380:2966" ph="SELECT o.cod... oferta" />
-            <marker date="1502203342241" expanded="true" signature="2435:2895" ph="select o.cod... oferta" />
-            <marker date="1502203342241" expanded="true" signature="2592:2611" ph="/*o.img AS i... " />
-            <marker date="1502203342241" expanded="true" signature="2712:2734" ph="/*e.logo AS " />
-            <marker date="1502203342241" expanded="true" signature="3521:4918" ph="SELECT o.cod... oferta" />
-            <marker date="1502203342241" expanded="true" signature="3521:4930" ph="SELECT o.cod... oferta" />
-            <marker date="1502203342241" expanded="true" signature="4863:4916" ph="SELECT id_us... usuario" />
-            <marker date="1502203342241" expanded="true" signature="5154:5892" ph="SELECT o.cod... oferta_mercado" />
-            <marker date="1502203342241" expanded="true" signature="6145:6588" ph="SELECT u.nom... usuario_comentario" />
-            <marker date="1502203342241" expanded="true" signature="6536:6587" ph="SELECT id_of... oferta" />
-            <marker date="1502203342241" expanded="true" signature="6800:6981" ph="SELECT o.id_... oferta" />
-            <marker date="1502203342241" expanded="true" signature="7658:7839" ph="SELECT o.id_... oferta" />
+            <marker date="1502203797815" expanded="true" signature="2380:2953" ph="SELECT o.cod... oferta" />
+            <marker date="1502203797815" expanded="true" signature="2380:2954" ph="SELECT o.cod... oferta" />
+            <marker date="1502203797815" expanded="true" signature="2380:2966" ph="SELECT o.cod... oferta" />
+            <marker date="1502203797815" expanded="true" signature="2435:2895" ph="select o.cod... oferta" />
+            <marker date="1502203797815" expanded="true" signature="2592:2611" ph="/*o.img AS i... " />
+            <marker date="1502203797815" expanded="true" signature="2712:2734" ph="/*e.logo AS " />
+            <marker date="1502203797815" expanded="true" signature="3521:5092" ph="SELECT o.cod... oferta" />
+            <marker date="1502203797815" expanded="true" signature="3521:5104" ph="SELECT o.cod... oferta" />
+            <marker date="1502203797815" expanded="true" signature="5037:5090" ph="SELECT id_us... usuario" />
+            <marker date="1502203797815" expanded="true" signature="5328:6066" ph="SELECT o.cod... oferta_mercado" />
+            <marker date="1502203797815" expanded="true" signature="6319:6762" ph="SELECT u.nom... usuario_comentario" />
+            <marker date="1502203797815" expanded="true" signature="6710:6761" ph="SELECT id_of... oferta" />
+            <marker date="1502203797815" expanded="true" signature="6974:7155" ph="SELECT o.id_... oferta" />
+            <marker date="1502203797815" expanded="true" signature="7832:8013" ph="SELECT o.id_... oferta" />
           </folding>
         </state>
       </provider>
