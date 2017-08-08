@@ -147,6 +147,20 @@ class Cupom
 
     private function getcupomonmarket(){
 
+        $Exibir = new Exibir();
+        $Exibir->exeExibir("SELECT 
+                                    o.codigo AS codigo_oferta,
+                                    u.codigo AS codigo_ofertante,
+                                    o.titulo AS titulo_oferta,
+                                    o.img AS img_oferta,
+                                    e.titulo AS titulo_parceiro
+                                    FROM oferta_mercado m
+                                    JOIN oferta o ON o.id_oferta = m.id_oferta
+                                    JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
+                                    JOIN usuario u ON u.id_usuario = m.id_usuario
+                                    WHERE m.pendente = 'N' AND m.id_usuario_sugestao IS NULL", NULL, NULL, NULL, FALSE);
+        
+        $this->Retorno = $Exibir->Resultado();
     }
 
     private function putcupommercado(){
