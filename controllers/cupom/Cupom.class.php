@@ -177,7 +177,7 @@ class Cupom
 
         $Exibir = new Exibir();
         $Exibir->exeExibir("SELECT 
-                                    u.nome + ' ' + u.sobrenome AS nome,
+                                    CONCAT(u.nome,' ',u.sobrenome) AS nome,
                                     u.avatar AS img_usuario,
                                     c.comentario
                                     FROM usuario_comentario c
