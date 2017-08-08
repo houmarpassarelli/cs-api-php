@@ -160,7 +160,7 @@ class Cupom
                                     JOIN usuario u ON u.id_usuario = m.id_usuario
                                     WHERE m.pendente = 'N' AND m.id_usuario_sugestao IS NULL", NULL, NULL, NULL, FALSE);
 
-        $this->Retorno = json_decode($Exibir->Resultado());
+        $this->Retorno = json_encode($Exibir->Resultado());
     }
 
     private function putcupommercado(){
