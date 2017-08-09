@@ -97,9 +97,9 @@ class Usuario extends Conexao
                 $this->Retorno = json_encode(["codigo" => "200"]);
             else:
                 if(!$verificaEmail[0]):
-                    $this->Retorno = $verificaEmail[1];
+                    $this->Retorno = json_encode(["codigo" => $verificaEmail[1]]);
                 elseif(!$verificaLogin[0]):
-                    $this->Retorno = $verificaLogin[1];
+                    $this->Retorno = json_encode(["codigo" => $verificaLogin[1]]);
                 else:
                     $this->Retorno = json_encode(["codigo" => "100" ]);
                 endif;
