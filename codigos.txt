@@ -1,10 +1,11 @@
 01 - Login:
-    0101 => Usuário duplicado
+    0101 => Email inválido
     0102 => Usuário inválido
     0103 => Senha Inválida
 02 - Usuario:
-    0201 => Email inválido
-    0202 => Email duplicado
+    0201 => Email duplicado
+    0202 => Usuário duplicado
+    0203 => Email Inválido
 03 - Pacote:
     0301 => Nome duplicado
 04 - Contato

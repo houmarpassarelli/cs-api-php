@@ -89,7 +89,7 @@ class Usuario extends Conexao
 
                 $DadosAuth = [
                     "id_usuario_access" => $Inserir->Resultado(),
-                    "token" => md5($this->Dados["email"].date("dmY"))
+                    "hash" => md5(date("dmYHis").$DadosUsuario["codigo"])
                 ];
 
                 $Inserir->exeInserir("usuario_auth", $DadosAuth);

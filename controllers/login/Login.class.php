@@ -16,11 +16,11 @@ class Login extends Conexao
     private function checkLogin(){
 
         $Exibir = new Exibir();
-        $Exibir->exeExibir(NULL,"usuario", "WHERE email = :email", "email={$this->Dados["usuario"]}",FALSE);
+        $Exibir->exeExibir(NULL,"usuario", "WHERE email = :email", "email={$this->Dados["login"]}",FALSE);
 
         if($Exibir->Resultado()):
 
-            $Senha = md5($this->Dados["senha"]);
+            $Senha = md5($this->Dados["password"]);
             $Exibir->exeExibir(NULL, "usuario_access","WHERE senha = :senha","senha={$Senha}", FALSE);
 
             if($Exibir->Resultado()):
@@ -32,6 +32,7 @@ class Login extends Conexao
                                                 u.sobrenome,
                                                 u.avatar,
                                                 u.email,
+                                                a.hash,
                                                 e.logradouro,
                                                 e.numero,
                                                 e.bairro,
@@ -40,6 +41,7 @@ class Login extends Conexao
                                                 c.sigla AS estado
                                                 FROM usuario u
                                                 LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
+                                                INNER JOIN usuario_auth a ON a.id_usuario_access = {$Exibir->Resultado()[0]['id_usuario_access']}
                                                 LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
                                                 WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
 
@@ -48,12 +50,12 @@ class Login extends Conexao
                 $this->Retorno = json_encode(['codigo' => '0103']);
             endif;
         else:
-            $Usuario = md5($this->Dados["usuario"]);
+            $Usuario = md5($this->Dados["login"]);
             $Exibir->exeExibir(NULL, "usuario_access","WHERE login = :login","login={$Usuario}", FALSE);
 
             if($Exibir->Resultado()):
 
-                $Senha = md5($this->Dados["senha"]);
+                $Senha = md5($this->Dados["password"]);
                 $Exibir->exeExibir(NULL, "usuario_access","WHERE senha = :senha","senha={$Senha}", FALSE);
 
                 if($Exibir->Resultado()):
@@ -65,6 +67,7 @@ class Login extends Conexao
                                                 u.sobrenome,
                                                 u.avatar,
                                                 u.email,
+                                                a.hash,
                                                 e.logradouro,
                                                 e.numero,
                                                 e.bairro,
@@ -73,6 +76,7 @@ class Login extends Conexao
                                                 c.sigla AS estado
                                                 FROM usuario u
                                                 LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
+                                                INNER JOIN usuario_auth a ON a.id_usuario_access = {$Exibir->Resultado()[0]['id_usuario_access']}
                                                 LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
                                                 WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
 

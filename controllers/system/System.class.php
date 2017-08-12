@@ -25,12 +25,12 @@ class System extends Conexao
             $Email->exeExibir(NULL, "usuario","WHERE email = :email","email={$email}", FALSE);
 
             if($Email->Resultado()):
-                return [false, '0202'];
+                return [false, '0201'];
             else:
                 return [true, '200'];
             endif;
         else:
-            return [false, '0201'];
+            return [false, '0203'];
         endif;
     }
 
@@ -42,7 +42,7 @@ class System extends Conexao
         $Login->exeExibir(NULL, "usuario_access", "WHERE login = :login","login={$usuario}", FALSE);
 
         if($Login->Resultado()):
-            return [false, '0101'];
+            return [false, '0202'];
         else:
 
             return [true, '200'];
