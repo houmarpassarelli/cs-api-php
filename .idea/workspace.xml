@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b20389c8-0356-4628-9ad2-0e62a4515980" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codigos.txt" afterPath="$PROJECT_DIR$/codigos.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.inc.php" afterPath="$PROJECT_DIR$/config.inc.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/login/Login.class.php" afterPath="$PROJECT_DIR$/controllers/login/Login.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/system/System.class.php" afterPath="$PROJECT_DIR$/controllers/system/System.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/usuario/Usuario.class.php" afterPath="$PROJECT_DIR$/controllers/usuario/Usuario.class.php" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -56,36 +54,47 @@
       <file leaf-file-name="Usuario.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/usuario/Usuario.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="67" column="46" lean-forward="true" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
+            <state relative-caret-position="1224">
+              <caret line="80" column="0" lean-forward="true" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
               <folding>
-                <marker date="1502547660846" expanded="true" signature="464:1354" ph="SELECT u.nom... usuario" />
-                <marker date="1502547660846" expanded="true" signature="1510:2331" ph="SELECT u.nom... usuario" />
-                <marker date="1502547660846" expanded="true" signature="4858:5047" ph="SELECT u.id_... usuario" />
-                <marker date="1502547660846" expanded="true" signature="5456:5549" ph="SELECT id_us... usuario" />
+                <marker date="1502592332144" expanded="true" signature="464:1354" ph="SELECT u.nom... usuario" />
+                <marker date="1502592332144" expanded="true" signature="1510:2331" ph="SELECT u.nom... usuario" />
+                <marker date="1502592332144" expanded="true" signature="4859:5048" ph="SELECT u.id_... usuario" />
+                <marker date="1502592332144" expanded="true" signature="5457:5550" ph="SELECT id_us... usuario" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="System.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="System.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/system/System.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1026">
-              <caret line="72" column="85" lean-forward="true" selection-start-line="72" selection-start-column="85" selection-end-line="72" selection-end-column="85" />
+            <state relative-caret-position="900">
+              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Login.class.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="config.inc.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.inc.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Login.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/login/Login.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+            <state relative-caret-position="1461">
+              <caret line="85" column="65" lean-forward="true" selection-start-line="85" selection-start-column="65" selection-end-line="85" selection-end-column="65" />
               <folding>
-                <marker date="1502548755835" expanded="true" signature="732:1937" ph="SELECT u.cod... usuario" />
-                <marker date="1502548755835" expanded="true" signature="2721:3926" ph="SELECT u.cod... usuario" />
+                <marker date="1502596877242" expanded="true" signature="732:1386" ph="SELECT u.cod... " />
+                <marker date="1502596877242" expanded="true" signature="732:2506" ph="SELECT u.cod... usuario" />
+                <marker date="1502596877242" expanded="true" signature="3290:5156" ph="SELECT u.cod... usuario" />
               </folding>
             </state>
           </provider>
@@ -94,8 +103,8 @@
       <file leaf-file-name="codigos.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codigos.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+            <state relative-caret-position="144">
+              <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -117,7 +126,7 @@
       <file leaf-file-name="Pacote.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/pacote/Pacote.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1494">
+            <state relative-caret-position="493">
               <caret line="85" column="54" lean-forward="false" selection-start-line="85" selection-start-column="54" selection-end-line="85" selection-end-column="54" />
               <folding>
                 <element signature="e#7#44#0#PHP" expanded="true" />
@@ -132,31 +141,11 @@
       <file leaf-file-name="Alterar.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/Alterar.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1098">
+            <state relative-caret-position="849">
               <caret line="67" column="33" lean-forward="true" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
               <folding>
                 <marker date="1499277050370" expanded="true" signature="1989:2026" ph="UPDATE ${{$t... " />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QRImage.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/chillerlan/php-qrcode/src/Output/QRImage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QRImageOptions.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/chillerlan/php-qrcode/src/Output/QRImageOptions.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -235,15 +224,15 @@
         <option value="$PROJECT_DIR$/models/Inserir.class.php" />
         <option value="$PROJECT_DIR$/init.php" />
         <option value="$PROJECT_DIR$/models/Conexao.class.php" />
-        <option value="$PROJECT_DIR$/config.inc.php" />
         <option value="$PROJECT_DIR$/teste.php" />
         <option value="$PROJECT_DIR$/controllers/pacote/Pacote.class.php" />
         <option value="$PROJECT_DIR$/controllers/cupom/Cupom.class.php" />
         <option value="$PROJECT_DIR$/cupomstore.sql" />
-        <option value="$PROJECT_DIR$/controllers/usuario/Usuario.class.php" />
-        <option value="$PROJECT_DIR$/controllers/login/Login.class.php" />
         <option value="$PROJECT_DIR$/codigos.txt" />
         <option value="$PROJECT_DIR$/controllers/system/System.class.php" />
+        <option value="$PROJECT_DIR$/config.inc.php" />
+        <option value="$PROJECT_DIR$/controllers/usuario/Usuario.class.php" />
+        <option value="$PROJECT_DIR$/controllers/login/Login.class.php" />
       </list>
     </option>
   </component>
@@ -567,7 +556,7 @@
       <workItem from="1502124031422" duration="241000" />
       <workItem from="1502126965849" duration="36854000" />
       <workItem from="1502378696196" duration="703000" />
-      <workItem from="1502546987021" duration="4173000" />
+      <workItem from="1502546987021" duration="10168000" />
     </task>
     <task id="LOCAL-00001" summary="Adição de retorno para não perder a linhada">
       <created>1501536400242</created>
@@ -629,7 +618,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277023000" />
+    <option name="totallyTimeSpent" value="283018000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -733,10 +722,10 @@
         <state relative-caret-position="432">
           <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <marker date="1502547660846" expanded="true" signature="464:1354" ph="SELECT u.nom... usuario" />
-            <marker date="1502547660846" expanded="true" signature="1510:2331" ph="SELECT u.nom... usuario" />
-            <marker date="1502547660846" expanded="true" signature="4858:5047" ph="SELECT u.id_... usuario" />
-            <marker date="1502547660846" expanded="true" signature="5456:5549" ph="SELECT id_us... usuario" />
+            <marker date="1502592332144" expanded="true" signature="464:1354" ph="SELECT u.nom... usuario" />
+            <marker date="1502592332144" expanded="true" signature="1510:2331" ph="SELECT u.nom... usuario" />
+            <marker date="1502592332144" expanded="true" signature="4859:5048" ph="SELECT u.id_... usuario" />
+            <marker date="1502592332144" expanded="true" signature="5457:5550" ph="SELECT id_us... usuario" />
           </folding>
         </state>
       </provider>
@@ -787,10 +776,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1502547660846" expanded="true" signature="464:1354" ph="SELECT u.nom... usuario" />
-            <marker date="1502547660846" expanded="true" signature="1510:2331" ph="SELECT u.nom... usuario" />
-            <marker date="1502547660846" expanded="true" signature="4858:5047" ph="SELECT u.id_... usuario" />
-            <marker date="1502547660846" expanded="true" signature="5456:5549" ph="SELECT id_us... usuario" />
+            <marker date="1502592332144" expanded="true" signature="464:1354" ph="SELECT u.nom... usuario" />
+            <marker date="1502592332144" expanded="true" signature="1510:2331" ph="SELECT u.nom... usuario" />
+            <marker date="1502592332144" expanded="true" signature="4859:5048" ph="SELECT u.id_... usuario" />
+            <marker date="1502592332144" expanded="true" signature="5457:5550" ph="SELECT id_us... usuario" />
           </folding>
         </state>
       </provider>
@@ -955,30 +944,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/library/phpqrcode/qrencode.php" />
-    <entry file="file://$PROJECT_DIR$/config.inc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="34" lean-forward="true" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/chillerlan/php-qrcode/src/Output/QRImage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/chillerlan/php-qrcode/src/Output/QRImageOptions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/teste.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -994,19 +959,6 @@
       <provider selected="true" editor-type-id="LargeFileEditor">
         <state relative-caret-position="360">
           <caret line="81" column="45" lean-forward="true" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/pacote/Pacote.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1494">
-          <caret line="85" column="54" lean-forward="false" selection-start-line="85" selection-start-column="54" selection-end-line="85" selection-end-column="54" />
-          <folding>
-            <element signature="e#7#44#0#PHP" expanded="true" />
-            <marker date="1502225454824" expanded="true" signature="1415:1477" ph="SELECT id_us... usuario" />
-            <marker date="1502225454824" expanded="true" signature="1415:1481" ph="SELECT id_us... usuario" />
-            <marker date="1502225454824" expanded="true" signature="2125:2179" ph="SELECT id_of... oferta" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1036,9 +988,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/codigos.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/chillerlan/php-qrcode/src/Output/QRImageOptions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/chillerlan/php-qrcode/src/Output/QRImage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/models/Alterar.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1098">
+        <state relative-caret-position="849">
           <caret line="67" column="33" lean-forward="true" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
           <folding>
             <marker date="1499277050370" expanded="true" signature="1989:2026" ph="UPDATE ${{$t... " />
@@ -1046,43 +1022,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/login/Login.class.php">
+    <entry file="file://$PROJECT_DIR$/controllers/system/System.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        <state relative-caret-position="900">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/pacote/Pacote.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="85" column="54" lean-forward="false" selection-start-line="85" selection-start-column="54" selection-end-line="85" selection-end-column="54" />
           <folding>
-            <marker date="1502548755835" expanded="true" signature="732:1937" ph="SELECT u.cod... usuario" />
-            <marker date="1502548755835" expanded="true" signature="2721:3926" ph="SELECT u.cod... usuario" />
+            <element signature="e#7#44#0#PHP" expanded="true" />
+            <marker date="1502225454824" expanded="true" signature="1415:1477" ph="SELECT id_us... usuario" />
+            <marker date="1502225454824" expanded="true" signature="1415:1481" ph="SELECT id_us... usuario" />
+            <marker date="1502225454824" expanded="true" signature="2125:2179" ph="SELECT id_of... oferta" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codigos.txt">
+    <entry file="file://$PROJECT_DIR$/config.inc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+        <state relative-caret-position="252">
+          <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/usuario/Usuario.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="67" column="46" lean-forward="true" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
+        <state relative-caret-position="1224">
+          <caret line="80" column="0" lean-forward="true" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
           <folding>
-            <marker date="1502547660846" expanded="true" signature="464:1354" ph="SELECT u.nom... usuario" />
-            <marker date="1502547660846" expanded="true" signature="1510:2331" ph="SELECT u.nom... usuario" />
-            <marker date="1502547660846" expanded="true" signature="4858:5047" ph="SELECT u.id_... usuario" />
-            <marker date="1502547660846" expanded="true" signature="5456:5549" ph="SELECT id_us... usuario" />
+            <marker date="1502592332144" expanded="true" signature="464:1354" ph="SELECT u.nom... usuario" />
+            <marker date="1502592332144" expanded="true" signature="1510:2331" ph="SELECT u.nom... usuario" />
+            <marker date="1502592332144" expanded="true" signature="4859:5048" ph="SELECT u.id_... usuario" />
+            <marker date="1502592332144" expanded="true" signature="5457:5550" ph="SELECT id_us... usuario" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/system/System.class.php">
+    <entry file="file://$PROJECT_DIR$/controllers/login/Login.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="72" column="85" lean-forward="true" selection-start-line="72" selection-start-column="85" selection-end-line="72" selection-end-column="85" />
-          <folding />
+        <state relative-caret-position="1461">
+          <caret line="85" column="65" lean-forward="true" selection-start-line="85" selection-start-column="65" selection-end-line="85" selection-end-column="65" />
+          <folding>
+            <marker date="1502596877242" expanded="true" signature="732:1386" ph="SELECT u.cod... " />
+            <marker date="1502596877242" expanded="true" signature="732:2506" ph="SELECT u.cod... usuario" />
+            <marker date="1502596877242" expanded="true" signature="3290:5156" ph="SELECT u.cod... usuario" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -27,23 +27,29 @@ class Login extends Conexao
 
                 $Profile = new Exibir();
                 $Profile->exeExibir("SELECT
-                                                u.codigo,
-                                                u.nome,
-                                                u.sobrenome,
-                                                u.avatar,
-                                                u.email,
-                                                a.hash,
-                                                e.logradouro,
-                                                e.numero,
-                                                e.bairro,
-                                                e.cep,
-                                                c.titulo AS cidade,
-                                                c.sigla AS estado
-                                                FROM usuario u
-                                                LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
-                                                INNER JOIN usuario_auth a ON a.id_usuario_access = {$Exibir->Resultado()[0]['id_usuario_access']}
-                                                LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
-                                                WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
+                                            u.codigo,
+                                            u.nome,
+                                            u.sobrenome,
+                                            u.avatar,
+                                            u.email,
+                                            u.visivel,
+                                            s.hash AS session_id,
+                                            ac.ativo,
+                                            COUNT(p.id_usuario) AS package,
+                                            CASE WHEN (SELECT id_usuario_access FROM usuario_sessao WHERE id_usuario_access = {$Exibir->Resultado()[0]['id_usuario_access']}) = 1 THEN 'N' ELSE 'S' END AS initial,
+                                            e.logradouro,
+                                            e.numero,
+                                            e.bairro,
+                                            e.cep,
+                                            c.titulo AS cidade,
+                                            c.sigla AS estado
+                                            FROM usuario u
+                                            LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
+                                            INNER JOIN usuario_access ac ON ac.id_usuario = u.id_usuario
+                                            LEFT JOIN usuario_sessao s ON s.id_usuario_access = ac.id_usuario_access                                               
+                                            LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
+                                            JOIN pacote_interacao p ON p.id_usuario = u.id_usuario
+                                            WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
 
                 $this->Retorno = json_encode(['codigo' => '200', 'profile' => $Profile->Resultado()[0]]);
             else:
@@ -67,7 +73,11 @@ class Login extends Conexao
                                                 u.sobrenome,
                                                 u.avatar,
                                                 u.email,
-                                                a.hash,
+                                                u.visivel,
+                                                s.hash AS session_id,
+                                                ac.ativo,
+                                                COUNT(p.id_usuario) AS package,
+                                                CASE WHEN (SELECT id_usuario_access FROM usuario_sessao WHERE id_usuario_access = {$Exibir->Resultado()[0]['id_usuario_access']}) = 1 THEN 'N' ELSE 'S' END AS initial,
                                                 e.logradouro,
                                                 e.numero,
                                                 e.bairro,
@@ -76,8 +86,10 @@ class Login extends Conexao
                                                 c.sigla AS estado
                                                 FROM usuario u
                                                 LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
-                                                INNER JOIN usuario_auth a ON a.id_usuario_access = {$Exibir->Resultado()[0]['id_usuario_access']}
+                                                INNER JOIN usuario_access ac ON ac.id_usuario = u.id_usuario
+                                                LEFT JOIN usuario_sessao s ON s.id_usuario_access = ac.id_usuario_access                                               
                                                 LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
+                                                JOIN pacote_interacao p ON p.id_usuario = u.id_usuario
                                                 WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
 
                     $this->Retorno = json_encode(['codigo' => '200', 'profile' => $Profile->Resultado()[0]]);

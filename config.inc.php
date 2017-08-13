@@ -9,7 +9,6 @@ define('PWD','');
 define('HOST','127.0.0.1');
 define('DB','cupomstore');
 
-
 //FUNÇÃO PARA CARREGAR CLASSES
 function default_classes($Class)
 {
