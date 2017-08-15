@@ -94,18 +94,61 @@ class Cupom
         endif;
 
         $perPack = new Exibir();
-        $perPack->exeExibir("SELECT
-                                    o.id_oferta,
-                                    o.codigo AS id_cupom,
-                                    o.titulo AS titulo_cupom,
-                                    o.img AS img_cupom,
-                                    e.titulo AS titulo_parceiro,
-                                    e.logo AS img_parceiro
-                                    FROM oferta o
-                                    LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
-                                    WHERE id_pacote = :id {$Condicoes}", NULL, NULL, "id={$this->ID}{$Parse}", FALSE);
+        $perPack->exeExibir("SELECT                                    
+                                        o.codigo,
+                                        o.titulo AS titulo_cupom,
+                                        o.img AS img_cupom,
+                                        o.descricao,
+                                        o.regulamento,
+                                        o.dias_uso,
+                                        o.min_pessoas,
+                                        o.max_pessoas,
+                                        p.id_pacote AS pacote,
+                                        p.titulo AS titulo_pacote,                                    
+                                        e.titulo AS titulo_parceiro,
+                                        e.logo AS img_parceiro
+                                        FROM oferta o
+                                        LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
+                                        LEFT JOIN pacote p ON p.id_pacote = o.id_pacote
+                                        WHERE id_pacote = :id {$Condicoes}", NULL, NULL, "id={$this->ID}{$Parse}", FALSE);
+
 
         $this->Retorno = json_encode($perPack->Resultado());
+    }
+
+    private function getgroupofcupomperpack(){
+
+        $array = [];
+
+        $Pacote = new Exibir();
+        $Pacote->exeExibir(NULL, "pacote", NULL, NULL, FALSE);
+
+        $perGroup = new Exibir();
+
+        for($a=0;$a < count($Pacote->Resultado()); $a++):
+            $perGroup->exeExibir("SELECT                                    
+                                        o.codigo,
+                                        o.titulo AS titulo_cupom,
+                                        o.img AS img_cupom,
+                                        o.descricao,
+                                        o.regulamento,
+                                        o.dias_uso,
+                                        o.min_pessoas,
+                                        o.max_pessoas,
+                                        p.id_pacote AS pacote,
+                                        p.titulo AS titulo_pacote,
+                                        e.logo AS img_parceiro,                                                                            
+                                        e.titulo AS titulo_parceiro                                        
+                                        FROM oferta o
+                                        LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
+                                        LEFT JOIN pacote p ON p.id_pacote = {$Pacote->Resultado()[$a]["id_pacote"]} LIMIT :limit", NULL, NULL, "limit={$this->LIMITE}");
+
+        $array[$Pacote->Resultado()[$a]["id_pacote"]] = $perGroup->Resultado();
+
+        endfor;
+
+        $this->Retorno = json_encode($array);
+
     }
 
     private function getcupomperuser(){
