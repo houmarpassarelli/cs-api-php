@@ -110,7 +110,7 @@ class Cupom
                                         FROM oferta o
                                         LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
                                         LEFT JOIN pacote p ON p.id_pacote = o.id_pacote
-                                        WHERE id_pacote = :id {$Condicoes}", NULL, NULL, "id={$this->ID}{$Parse}", FALSE);
+                                        WHERE o.id_pacote = :id {$Condicoes}", NULL, NULL, "id={$this->ID}{$Parse}", FALSE);
 
 
         $this->Retorno = json_encode($perPack->Resultado());
