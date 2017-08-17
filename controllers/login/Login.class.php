@@ -34,6 +34,7 @@ class Login extends Conexao
                                             u.email,
                                             u.visivel,
                                             s.hash AS session_id,
+                                            ath.hash AS user_hash,
                                             ac.ativo,
                                             COUNT(p.id_usuario) AS package,
                                             CASE WHEN (SELECT COUNT(id_usuario_access) FROM usuario_sessao WHERE id_usuario_access = {$Exibir->Resultado()[0]['id_usuario_access']}) = 1 THEN 'N' ELSE 'S' END AS initial,
@@ -46,7 +47,8 @@ class Login extends Conexao
                                             FROM usuario u
                                             LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
                                             LEFT JOIN usuario_access ac ON ac.id_usuario = u.id_usuario
-                                            LEFT JOIN usuario_sessao s ON s.id_usuario_access = ac.id_usuario_access                                               
+                                            LEFT JOIN usuario_sessao s ON s.id_usuario_access = ac.id_usuario_access
+                                            LEFT JOIN usuario_aauth ath ON ath.id_usuario_access = s.id_usuario_access
                                             LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
                                             LEFT JOIN pacote_interacao p ON p.id_usuario = u.id_usuario
                                             WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
@@ -75,6 +77,7 @@ class Login extends Conexao
                                                 u.email,
                                                 u.visivel,
                                                 s.hash AS session_id,
+                                                ath.hash AS user_hash,
                                                 ac.ativo,
                                                 COUNT(p.id_usuario) AS package,
                                                 CASE WHEN (SELECT COUNT(id_usuario_access) FROM usuario_sessao WHERE id_usuario_access = {$Exibir->Resultado()[0]['id_usuario_access']}) = 1 THEN 'N' ELSE 'S' END AS initial,
@@ -87,7 +90,8 @@ class Login extends Conexao
                                                 FROM usuario u
                                                 LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
                                                 LEFT JOIN usuario_access ac ON ac.id_usuario = u.id_usuario
-                                                LEFT JOIN usuario_sessao s ON s.id_usuario_access = ac.id_usuario_access                                               
+                                                LEFT JOIN usuario_sessao s ON s.id_usuario_access = ac.id_usuario_access
+                                                LEFT JOIN usuario_aauth ath ON ath.id_usuario_access = s.id_usuario_access
                                                 LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
                                                 LEFT JOIN pacote_interacao p ON p.id_usuario = u.id_usuario
                                                 WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
@@ -100,5 +104,21 @@ class Login extends Conexao
                 $this->Retorno = json_encode(['codigo' => '0102']);
             endif;
         endif;
+    }
+
+    private function putsession(){
+
+        $Access = new Exibir();
+        $Access->exeExibir("SELECT uac.id_usuario_access, uat.hash FROM usuario u
+                                    LEFT JOIN usuario_access uac ON uac.id_usuario = u.id_usuario
+                                    LEFT JOIN usuario_auth uat ON uat.id_usuario_access = uac.id_usuario_access
+                                    WHERE u.codigo = :codigo", NULL, NULL, "codigo={$this->Dados["codigo"]}", FALSE);
+        $Dados = [
+          "id_usuario_access" => $Access->Resultado()[0]["id_usuario_access"],
+          "hash" => sha1(date("dmYHis").$Access->Resultado()[0]["hash"])
+        ];
+
+        $Inserir = new Inserir();
+        $Inserir->exeInserir("usuario_session", $Dados);
     }
 }

@@ -34,10 +34,27 @@ class Cupom
 
     private function getcupom(){
 
+        $Exibir = new Exibir();
+
         if(!is_null($this->ID)):
-
-
-
+            $Exibir->exeExibir("SELECT                                    
+                                        o.codigo,
+                                        o.titulo AS titulo_cupom,
+                                        o.img AS img_cupom,
+                                        o.descricao,
+                                        o.regulamento,
+                                        o.dias_uso,
+                                        o.min_pessoas,
+                                        o.max_pessoas,
+                                        o.updated_at AS modified,
+                                        p.id_pacote AS pacote,
+                                        p.titulo AS titulo_pacote,
+                                        e.logo AS img_parceiro,                                                                            
+                                        e.titulo AS titulo_parceiro
+                                        FROM oferta o
+                                        LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
+                                        LEFT JOIN pacote p ON p.id_pacote = o.id_pacote
+                                        WHERE o.codigo = :codigo", NULL, NULL, "codigo={$this->ID}", FALSE);
         else:
 
         endif;
@@ -103,6 +120,7 @@ class Cupom
                                         o.dias_uso,
                                         o.min_pessoas,
                                         o.max_pessoas,
+                                        o.updated_at AS modified,
                                         p.id_pacote AS pacote,
                                         p.titulo AS titulo_pacote,                                    
                                         e.titulo AS titulo_parceiro,
@@ -135,13 +153,14 @@ class Cupom
                                         o.dias_uso,
                                         o.min_pessoas,
                                         o.max_pessoas,
+                                        o.updated_at AS modified,
                                         p.id_pacote AS pacote,
                                         p.titulo AS titulo_pacote,
                                         e.logo AS img_parceiro,                                                                            
                                         e.titulo AS titulo_parceiro                                        
                                         FROM oferta o
                                         LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
-                                        LEFT JOIN pacote p ON p.id_pacote = {$Pacote->Resultado()[$a]["id_pacote"]} LIMIT :limit", NULL, NULL, "limit={$this->LIMITE}");
+                                        LEFT JOIN pacote p ON p.id_pacote = {$Pacote->Resultado()[$a]["id_pacote"]} LIMIT :limit", NULL, NULL, "limit={$this->LIMITE}", FALSE);
 
         $array[$Pacote->Resultado()[$a]["id_pacote"]] = $perGroup->Resultado();
 
@@ -149,6 +168,30 @@ class Cupom
 
         $this->Retorno = json_encode($array);
 
+    }
+
+    private function getcupommodified(){
+
+        $array = [];
+
+        $Pacote = new Exibir();
+        $Pacote->exeExibir(NULL, "pacote", NULL, NULL, FALSE);
+
+        $perGroup = new Exibir();
+
+        for($a=0;$a < count($Pacote->Resultado()); $a++):
+            $perGroup->exeExibir("SELECT                                    
+                                            codigo,                                        
+                                            updated_at AS modified,
+                                            id_pacote AS pacote,
+                                            FROM oferta
+                                            WHERE id_pacote : pacote", NULL, NULL, "pacote={$Pacote->Resultado()[$a]["id_pacote"]}", FALSE);
+
+            $array[$Pacote->Resultado()[$a]["id_pacote"]] = $perGroup->Resultado();
+
+        endfor;
+
+        $this->Retorno = json_encode($array);
     }
 
     private function getcupomperuser(){
@@ -175,6 +218,7 @@ class Cupom
                                     o.max_pessoas,
                                     o.validade,
                                     o.img AS img_cupom,
+                                    o.updated_at AS modified,
                                     i.altcode,
                                     i.qrcode,
                                     e.titulo AS titulo_parceiro,
