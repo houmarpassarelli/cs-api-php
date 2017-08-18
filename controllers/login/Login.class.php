@@ -120,5 +120,11 @@ class Login extends Conexao
 
         $Inserir = new Inserir();
         $Inserir->exeInserir("usuario_session", $Dados);
+
+        if($Inserir->errorCode() == '23000' || $Inserir->errorCode() == '42S02' || $Inserir->errorCode() == '42S22'):
+            $this->Retorno = json_encode(["codigo" => $Inserir->errorCode()]);
+        else:
+            $this->Retorno = json_encode(["codigo" => "200", "session_id" => $Dados["hash"]]);
+        endif;
     }
 }

@@ -97,6 +97,7 @@ class System extends Conexao
                         "putsession" => "cfbf1ba801d4636ff4c61f349cc7b948",
                         "pacote" => "c307f45ed96b6596975a477a22f199f0",
                         "getpacote" => "772f4e03368ec3654f10d185260398e6",
+                        "getpacoteperuser" => "0bac5204e2a85e8a068dd700f41d2ca3",
                         "putpacote" => "0710e0529b97eda266e332822f9cd0fc",
                         "updatepacote" => "",
                         "deletepacote" => "",

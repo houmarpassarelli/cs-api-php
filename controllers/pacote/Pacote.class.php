@@ -44,14 +44,30 @@ class Pacote extends Cupom
 
     private function getpacote(){
 
+        $array = [];
+
         $Exibir = new Exibir();
 
         if(!is_null($this->ID)):
 
         else:
             $Exibir->exeExibir(NULL, "pacote", NULL, NULL, FALSE);
-            $this->Retorno = json_encode($Exibir->Resultado());
+
+            for($a=0; $a < count($Exibir->Resultado()); $a++):
+                
+                $array[$Exibir->Resultado()[$a]["id_pacote"]] = $Exibir->Resultado()[$a];
+                $array[$Exibir->Resultado()[$a]["id_pacote"]]["utilizado"] = "N";
+
+                unset($array[$Exibir->Resultado()[$a]["id_pacote"]]["id_pacote"]);
+            endfor;
+
+            $this->Retorno = json_encode($array);
+
         endif;
+    }
+
+    private function getpacoteperuser(){
+
     }
 
     private function setpacote(){
