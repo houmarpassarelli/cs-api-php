@@ -1,5 +1,6 @@
 {
     "require": {
-        "chillerlan/php-qrcode": "dev-master"
+        "chillerlan/php-qrcode": "dev-master",
+        "intervention/image": "^2.4"
     }
 }
