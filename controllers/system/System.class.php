@@ -109,7 +109,8 @@ class System extends Conexao
                         "updatecontato" => "",
                         "deletecontato" => "",
                         "imagem" => "bf19122987928493131d5bf846637fbc",
-                        "putimagem" => "c99a3febab0c09597b6dd62a1ba25cb7"
+                        "putimagem" => "c99a3febab0c09597b6dd62a1ba25cb7",
+                        "getimagemperXnID" => "169a0bd32884f98127aa2530f1c37e4e"
                     ];
      
        

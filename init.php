@@ -10,7 +10,9 @@ $request = (new System())->Request($_SERVER['REQUEST_URI']);
 $output = NULL;
 
 //var_dump($input);
-//var_dump($_FILES);
+//echo '<pre>';
+//print_r($_FILES);
+//echo '</pre>';
 //var_dump(getimagesize($_FILES['arquivo']['tmp_name']));
 
 if(!empty($request["PATH"][2])):
@@ -173,16 +175,25 @@ if(!empty($request["PATH"][2])):
             break;
         case 'imagem':
             if(!empty($request["PATH"][3])):
-
+                if($request["METHOD"] == 'GET'):
+                    @$output = (new callImagem([
+                        "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                        "ID" => $request["PATH"][4],
+                        "LIMIT" => $request["PATH"][5],
+                        "OFFSET" => $request["PATH"][6]
+                    ]))->Resultado();
+                endif;
             else:
-                @$output = (new callImagem([
+                $output = (new callImagem([
                     "METODO" => (new System())->URI_COMPARE("c99a3febab0c09597b6dd62a1ba25cb7"),
-                    "DADOS" => ""
+                    "DADOS" => $_FILES
                 ]))->Resultado();
             endif;
             break;
     endswitch;
     file_put_contents('php://output', $output);
-    //print_r($output);
+    echo '<pre>';
+    print_r($output);
+    echo '</pre>';
 endif;
 ?>

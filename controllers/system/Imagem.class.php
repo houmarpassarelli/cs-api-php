@@ -15,25 +15,41 @@ class Imagem{
         return $this->Retorno;
     }
 
-    private function putimagem(){
+    private function putimagem()
+    {
 
         $img = new ImageManager();
-        $sizes = ['x480' => 480, 'x640' => 640, 'x760' => 760, 'x1024' => 1024, 'x1280' => 1280, 'x1440' => 1440, 'x1920' => 1920, 'x2048' => 2048, 'x2160' => 2160];
-        //$keys = array_keys($sizes);
-        $convert = [];
+        $Inserir = new Inserir();
 
-        for($a=0; $a < count($sizes); $a++):
-            //$convert[array_keys($sizes)[$a]] = array_values($sizes)[$a];
-            $convert[array_keys($sizes)[$a]] = $img->make('./teste2.jpg')->encode('jpg', 85)->widen(array_values($sizes)[$a])->encode('data-url');
+        $sizes = ['x480' => 480, 'x640' => 640, 'x760' => 760, 'x1024' => 1024, 'x1280' => 1280, 'x1440' => 1440, 'x1920' => 1920, 'x2048' => 2048, 'x2160' => 2160];
+        $Dados = [];
+
+        for ($a = 0; $a < count($sizes); $a++):
+            for($b=0; $b < count($this->Dados['arquivos']['tmp_name']); $b++):
+                $Dados[$b]['original'] = $img->make($this->Dados['arquivos']['tmp_name'][$b])->encode('data-url');
+                $Dados[$b][array_keys($sizes)[$a]] = $img->make($this->Dados['arquivos']['tmp_name'][$b])->encode('jpg', 85)->widen(array_values($sizes)[$a])->encode('data-url');
+            endfor;
         endfor;
 
-        //exit(print_r($convert));
+        if(count($Dados) == 1):
+            $Inserir->exeInserir("img_interacao", $Dados);
+        else:
+            for($c=0;$c < count($Dados);$c++):
+                $Inserir->exeInserir("img_interacao", $Dados[$c]);
+            endfor;
+        endif;
 
-        $this->Retorno = json_encode($convert);
+        $this->Retorno = count($Dados);
 
-//        $x480 = $img->make()->encode('jpg', 85)->widen(480)->encode('data-url');
-//        $x640 = $img->make()->encode('jpg', 85)->widen(640)->encode('data-url');
-//        $x760 = $img->make()->encode('jpg', 85)->widen(760)->encode('data-url');
+    }
+
+    private function getimagemperXnID()
+    {
+        $Exibir = new Exibir();
+
+        $Exibir->exeExibir("SELECT x480 FROM img_interacao", NULL, NULL, NULL, FALSE);
+
+        $this->Retorno = json_encode($Exibir->Resultado()[0]);
 
     }
 
