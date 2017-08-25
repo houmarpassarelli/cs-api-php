@@ -32,15 +32,12 @@ class Imagem{
         endfor;
 
         if(count($Dados) == 1):
-            $Inserir->exeInserir("img_interacao", $Dados);
+            $Inserir->exeInserir("img_interacao", $Dados[0]);
         else:
             for($c=0;$c < count($Dados);$c++):
                 $Inserir->exeInserir("img_interacao", $Dados[$c]);
             endfor;
         endif;
-
-        $this->Retorno = count($Dados);
-
     }
 
     private function getimagemperXnID()

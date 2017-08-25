@@ -59,7 +59,7 @@ class Inserir extends Conexao{
             $this->Resultado = $this->Conexao->lastInsertId();
         }catch(PDOException $erro){
             $this->Resultado = NULL;
-            //PHPErro($erro->getCode(), $erro->getMessage(), $erro->getFile(), $erro->getLine());
+            PHPErro($erro->getCode(), $erro->getMessage(), $erro->getFile(), $erro->getLine());
         }
     }
 

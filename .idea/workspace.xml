@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b20389c8-0356-4628-9ad2-0e62a4515980" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.inc.php" afterPath="$PROJECT_DIR$/config.inc.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/system/Imagem.class.php" afterPath="$PROJECT_DIR$/controllers/system/Imagem.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/system/System.class.php" afterPath="$PROJECT_DIR$/controllers/system/System.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init.php" afterPath="$PROJECT_DIR$/init.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teste.php" afterPath="$PROJECT_DIR$/teste.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cupomstore.sql" afterPath="$PROJECT_DIR$/cupomstore.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/Inserir.class.php" afterPath="$PROJECT_DIR$/models/Inserir.class.php" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,8 +53,8 @@
       <file leaf-file-name="init.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/init.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="831">
-              <caret line="198" column="2" lean-forward="true" selection-start-line="198" selection-start-column="2" selection-end-line="198" selection-end-column="2" />
+            <state relative-caret-position="219">
+              <caret line="167" column="33" lean-forward="true" selection-start-line="167" selection-start-column="33" selection-end-line="167" selection-end-column="33" />
               <folding>
                 <marker date="1503609897816" expanded="true" signature="9160:9213" ph="..." />
               </folding>
@@ -87,8 +85,8 @@
       <file leaf-file-name="config.inc.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.inc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+            <state relative-caret-position="648">
+              <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -109,25 +107,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Imagem.class.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Imagem.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/system/Imagem.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+            <state relative-caret-position="453">
+              <caret line="34" column="61" lean-forward="true" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
               <folding>
-                <marker date="1503611820145" expanded="true" signature="1437:1467" ph="SELECT x480 img_interacao" />
+                <marker date="1503693355149" expanded="true" signature="1398:1428" ph="SELECT x480 img_interacao" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Inserir.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Inserir.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/Inserir.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+            <state relative-caret-position="486">
+              <caret line="48" column="33" lean-forward="false" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="33" />
               <folding>
-                <marker date="1501943863668" expanded="true" signature="1184:1242" ph="INSERT INTO $... " />
+                <marker date="1503692285211" expanded="true" signature="1184:1242" ph="INSERT INTO $... " />
               </folding>
             </state>
           </provider>
@@ -229,7 +227,6 @@
         <option value="$PROJECT_DIR$/controllers/parceiro/Parceiro.class.php" />
         <option value="$PROJECT_DIR$/abstract.php" />
         <option value="$PROJECT_DIR$/controllers/contato/Contato.class.php" />
-        <option value="$PROJECT_DIR$/models/Inserir.class.php" />
         <option value="$PROJECT_DIR$/models/Conexao.class.php" />
         <option value="$PROJECT_DIR$/cupomstore.sql" />
         <option value="$PROJECT_DIR$/codigos.txt" />
@@ -241,6 +238,7 @@
         <option value="$PROJECT_DIR$/teste.php" />
         <option value="$PROJECT_DIR$/init.php" />
         <option value="$PROJECT_DIR$/config.inc.php" />
+        <option value="$PROJECT_DIR$/models/Inserir.class.php" />
         <option value="$PROJECT_DIR$/controllers/system/Imagem.class.php" />
       </list>
     </option>
@@ -456,7 +454,7 @@
       <workItem from="1502546987021" duration="25227000" />
       <workItem from="1502915294497" duration="16807000" />
       <workItem from="1503341135277" duration="2767000" />
-      <workItem from="1503500814328" duration="21074000" />
+      <workItem from="1503500814328" duration="25047000" />
     </task>
     <task id="LOCAL-00001" summary="Adição de retorno para não perder a linhada">
       <created>1501536400242</created>
@@ -518,7 +516,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="338725000" />
+    <option name="totallyTimeSpent" value="342698000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -956,38 +954,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/init.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="198" column="2" lean-forward="true" selection-start-line="198" selection-start-column="2" selection-end-line="198" selection-end-column="2" />
+        <state relative-caret-position="219">
+          <caret line="167" column="33" lean-forward="true" selection-start-line="167" selection-start-column="33" selection-end-line="167" selection-end-column="33" />
           <folding>
             <marker date="1503609897816" expanded="true" signature="9160:9213" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/Inserir.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="48" column="33" lean-forward="false" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="33" />
+          <folding>
+            <marker date="1503692285211" expanded="true" signature="1184:1242" ph="INSERT INTO $... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config.inc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+        <state relative-caret-position="648">
+          <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/system/Imagem.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+        <state relative-caret-position="453">
+          <caret line="34" column="61" lean-forward="true" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
           <folding>
-            <marker date="1503611820145" expanded="true" signature="1437:1467" ph="SELECT x480 img_interacao" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Inserir.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
-          <folding>
-            <marker date="1501943863668" expanded="true" signature="1184:1242" ph="INSERT INTO $... " />
+            <marker date="1503693355149" expanded="true" signature="1398:1428" ph="SELECT x480 img_interacao" />
           </folding>
         </state>
       </provider>
