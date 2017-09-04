@@ -1,11 +1,8 @@
 <?php
+use chillerlan\QRCode\Output\QRImage;
+use chillerlan\QRCode\Output\QRImageOptions;
+use chillerlan\QRCode\QRCode;
 
-/**
- * Created by PhpStorm.
- * User: Houmar
- * Date: 31/05/2017
- * Time: 09:19
- */
 class Cupom
 {
     private $Retorno;
@@ -14,25 +11,62 @@ class Cupom
     private $Codigo;
     private $LIMITE;
     private $OFFSET;
-
+    private $RESOLUTION;
     public function Retorno(array $dados){
 
         $this->Dados = $dados["DADOS"] ?? NULL;
         $this->ID = $dados["ID"] ?? NULL;
         $this->LIMITE = $dados["LIMIT"] ?? NULL;
         $this->OFFSET = $dados["OFFSET"] ?? NULL;
+        $this->RESOLUTION = $dados["RESOLUTION"] ?? NULL;
         $this->{$dados["METODO"]}();
 
         return $this->Retorno;
     }
 
-    static protected function setcupomuser(array $dados){
+    static public function setcupomuser(array $dados){
+
+        $Cupom = new Exibir();
+        $Cupom->exeExibir("SELECT id_oferta, id_pacote FROM oferta", NULL, NULL, NULL, FALSE);
+
+        $iniSobrenome = NULL;
+
+        $qrImageOptions = new QRImageOptions;
+        $qrImageOptions->pixelSize = 8;
+        $qrImageOptions->base64 = true;
+
+        foreach(explode(" ", $dados["sobrenome"]) as $Value):
+            if(($Value <> "da") && ($Value <> "de") && ($Value <> "di") && ($Value <> "do") && ($Value <> "du")):
+                $iniSobrenome .= substr($Value, 0 , 1);
+            endif;
+        endforeach;
 
         $Inserir = new Inserir();
-        $Inserir->exeInserir("oferta_interacao", ["id_pacote" => $dados["codpack"], "id_usuario" => $dados["iduser"], "id_oferta" => $dados["codcupom"], "hash" => $dados["hash"], "altcode" => $dados["altcode"], "qrcode" => $dados["qrcode"]]);
+
+        for($a=0;$a < count($Cupom->Resultado()); $a++):
+
+            $hash = sha1($dados['id_usuario'].date("dmYHis").$Cupom->Resultado()[$a]["id_oferta"]);
+            $altQRCode = strtoupper(substr($dados["nome"], 0 , 1).$iniSobrenome.substr($dados['id_usuario'],0 , 3).substr($hash,0, 3));
+            $qrcode = (new QRCode($hash.$altQRCode, new QRImage($qrImageOptions)))->output();
+
+
+            $Inserir->exeInserir("oferta_interacao",
+                ["id_pacote" => $Cupom->Resultado()[$a]["id_pacote"],
+                "id_usuario" => $dados['id_usuario'],
+                "id_oferta" => $Cupom->Resultado()[$a]["id_oferta"],
+                "hash" => $hash,
+                "altcode" => $altQRCode,
+                "qrcode" => $qrcode]
+            );
+        endfor;
+
+//        $Inserir = new Inserir();
+//        $Inserir->exeInserir("oferta_interacao", ["id_pacote" => $dados["codpack"], "id_usuario" => $dados["iduser"], "id_oferta" => $dados["codcupom"], "hash" => $dados["hash"], "altcode" => $dados["altcode"], "qrcode" => $dados["qrcode"]]);
     }
 
     private function getcupom(){
+
+        $resolution = Imagem::directXperRequest($this->RESOLUTION);
 
         $Exibir = new Exibir();
 
@@ -40,7 +74,8 @@ class Cupom
             $Exibir->exeExibir("SELECT                                    
                                         o.codigo,
                                         o.titulo AS titulo_cupom,
-                                        o.img AS img_cupom,
+                                        (SELECT {$resolution} FROM img_interacao WHERE id_oferta = o.id_oferta) AS img_cupom,
+                                        (SELECT updated_at FROM img_interacao WHERE id_oferta = o.id_oferta) AS img_cupom_modified,
                                         o.descricao,
                                         o.regulamento,
                                         o.dias_uso,
@@ -48,9 +83,10 @@ class Cupom
                                         o.max_pessoas,
                                         o.updated_at AS modified,
                                         p.id_pacote AS pacote,
-                                        p.titulo AS titulo_pacote,
-                                        e.logo AS img_parceiro,                                                                            
-                                        e.titulo AS titulo_parceiro
+                                        p.titulo AS titulo_pacote,                                                                        
+                                        e.titulo AS titulo_parceiro,
+                                        (SELECT x480 FROM img_interacao WHERE id_estabelecimento = e.id_estabelecimento) AS img_parceiro,
+                                        (SELECT updated_at FROM img_interacao WHERE id_estabelecimento = e.id_estabelecimento) AS img_parceiro_modified
                                         FROM oferta o
                                         LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
                                         LEFT JOIN pacote p ON p.id_pacote = o.id_pacote
@@ -58,6 +94,8 @@ class Cupom
         else:
 
         endif;
+
+        $this->Retorno = json_encode($Exibir->Resultado()[0]);
 
     }
 
@@ -97,6 +135,8 @@ class Cupom
 
     private function getcupomperpack(){
 
+        $resolution = Imagem::directXperRequest($this->RESOLUTION);
+
         $Condicoes = '';
         $Parse = '';
 
@@ -114,7 +154,8 @@ class Cupom
         $perPack->exeExibir("SELECT                                    
                                         o.codigo,
                                         o.titulo AS titulo_cupom,
-                                        o.img AS img_cupom,
+                                        (SELECT {$resolution} FROM img_interacao WHERE id_oferta = o.id_oferta) AS img_cupom,
+                                        (SELECT updated_at FROM img_interacao WHERE id_oferta = o.id_oferta) AS img_cupom_modified,
                                         o.descricao,
                                         o.regulamento,
                                         o.dias_uso,
@@ -124,7 +165,8 @@ class Cupom
                                         p.id_pacote AS pacote,
                                         p.titulo AS titulo_pacote,                                    
                                         e.titulo AS titulo_parceiro,
-                                        e.logo AS img_parceiro
+                                        (SELECT x480 FROM img_interacao WHERE id_estabelecimento = e.id_estabelecimento) AS img_parceiro,
+                                        (SELECT updated_at FROM img_interacao WHERE id_estabelecimento = e.id_estabelecimento) AS img_parceiro_modified
                                         FROM oferta o
                                         LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
                                         LEFT JOIN pacote p ON p.id_pacote = o.id_pacote
@@ -137,6 +179,7 @@ class Cupom
     private function getgroupofcupomperpack(){
 
         $array = [];
+        $resolution = Imagem::directXperRequest($this->RESOLUTION);
 
         $Pacote = new Exibir();
         $Pacote->exeExibir(NULL, "pacote", NULL, NULL, FALSE);
@@ -146,8 +189,9 @@ class Cupom
         for($a=0;$a < count($Pacote->Resultado()); $a++):
             $perGroup->exeExibir("SELECT                                    
                                         o.codigo,
-                                        o.titulo AS titulo_cupom,
-                                        o.img AS img_cupom,
+                                        o.titulo AS titulo_cupom,                                        
+                                        (SELECT {$resolution} FROM img_interacao WHERE id_oferta = o.id_oferta) AS img_cupom,
+                                        (SELECT updated_at FROM img_interacao WHERE id_oferta = o.id_oferta) AS img_cupom_modified,
                                         o.descricao,
                                         o.regulamento,
                                         o.dias_uso,
@@ -155,49 +199,45 @@ class Cupom
                                         o.max_pessoas,
                                         o.updated_at AS modified,
                                         p.id_pacote AS pacote,
-                                        p.titulo AS titulo_pacote,
-                                        e.logo AS img_parceiro,                                                                            
-                                        e.titulo AS titulo_parceiro                                        
+                                        p.titulo AS titulo_pacote,                                                                         
+                                        e.titulo AS titulo_parceiro,
+                                        (SELECT x480 FROM img_interacao WHERE id_estabelecimento = o.id_estabelecimento) AS img_parceiro,
+                                        (SELECT updated_at FROM img_interacao WHERE id_estabelecimento = o.id_estabelecimento) AS img_parceiro_modified                                                                       
                                         FROM oferta o
                                         LEFT JOIN estabelecimento e ON e.id_estabelecimento = o.id_estabelecimento
-                                        LEFT JOIN pacote p ON p.id_pacote = {$Pacote->Resultado()[$a]["id_pacote"]} LIMIT :limit", NULL, NULL, "limit={$this->LIMITE}", FALSE);
+                                        LEFT JOIN pacote p ON p.id_pacote = o.id_pacote 
+                                        WHERE o.id_pacote = :id_pacote LIMIT :limit", NULL, NULL, "id_pacote={$Pacote->Resultado()[$a]["id_pacote"]}&limit={$this->LIMITE}", FALSE);
 
         $array[$Pacote->Resultado()[$a]["id_pacote"]] = $perGroup->Resultado();
 
         endfor;
-
+        
         $this->Retorno = json_encode($array);
 
     }
 
     private function getcupommodified(){
 
-        $array = [];
+        $Exibir = new Exibir();
+        $Exibir->exeExibir("SELECT
+                                    o.codigo,
+                                    o.updated_at AS modified,
+                                    o.id_pacote AS pacote,
+                                    img.updated_at AS img_modified
+                                    FROM oferta o
+                                    LEFT JOIN img_interacao img ON img.id_oferta = o.id_oferta
+                                    WHERE o.id_pacote = :pacote LIMIT :limit", NULL, NULL, "pacote={$this->ID}&limit={$this->LIMITE}");
 
-        $Pacote = new Exibir();
-        $Pacote->exeExibir(NULL, "pacote", NULL, NULL, FALSE);
 
-        $perGroup = new Exibir();
-
-        for($a=0;$a < count($Pacote->Resultado()); $a++):
-            $perGroup->exeExibir("SELECT                                    
-                                            codigo,                                        
-                                            updated_at AS modified,
-                                            id_pacote AS pacote,
-                                            FROM oferta
-                                            WHERE id_pacote : pacote", NULL, NULL, "pacote={$Pacote->Resultado()[$a]["id_pacote"]}", FALSE);
-
-            $array[$Pacote->Resultado()[$a]["id_pacote"]] = $perGroup->Resultado();
-
-        endfor;
-
-        $this->Retorno = json_encode($array);
+        $this->Retorno = json_encode($Exibir->Resultado());
     }
 
     private function getcupomperuser(){
 
         $Condicoes = '';
         $Parse = '';
+
+        $resolution = Imagem::directXperRequest($this->RESOLUTION);
 
         if(!empty($this->LIMITE)):
             $Condicoes .= "LIMIT :limit ";
@@ -216,13 +256,13 @@ class Cupom
                                     o.descricao AS descricao_cupom,
                                     o.min_pessoas,
                                     o.max_pessoas,
-                                    o.validade,
-                                    o.img AS img_cupom,
+                                    o.validade,                                    
+                                    (SELECT {$resolution} FROM img_interacao WHERE id_oferta = o.id_oferta) AS img_cupom,
                                     o.updated_at AS modified,
                                     i.altcode,
                                     i.qrcode,
-                                    e.titulo AS titulo_parceiro,
-                                    e.logo AS img_parceiro,
+                                    e.titulo AS titulo_parceiro,                                    
+                                    (SELECT x480 FROM img_interacao WHERE id_estabelecimento = o.id_estabelecimento) AS img_parceiro,
                                     e.descricao AS descricao_parceiro,
                                     CASE WHEN m.id_oferta IS NOT NULL THEN 'S' ELSE 'N' END AS mercado,
                                     ROUND(AVG(r.rating)) AS rating,

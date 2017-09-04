@@ -13,6 +13,7 @@ class Parceiro extends Conexao
     private $ID;
     private $LIMITE;
     private $OFFSET;
+    private $FILES;
 
     public function Retorno(array $dados){
 
@@ -20,6 +21,7 @@ class Parceiro extends Conexao
         $this->ID = $dados["ID"] ?? NULL;
         $this->LIMITE = $dados["LIMIT"] ?? NULL;
         $this->OFFSET = $dados["OFFSET"] ?? NULL;
+        $this->FILES = $dados["FILES"] ?? NULL;
         $this->{$dados["METODO"]}();
 
         return $this->Retorno;
@@ -46,16 +48,33 @@ class Parceiro extends Conexao
 
     private function putparceiro(){
 
+//        if(!is_null($this->Dados)):
+//
+//            //@$Dados = [ "identify" => md5($this->Dados["nome"].date('dmYHis')), "dados" => [$this->Dados]];
+//
+//            $Conexao = $this->Conexao();
+//            $Collection = $Conexao->csdb->parceiro;
+//
+//            $this->Retorno = $Collection->insertOne($this->Dados)->getInsertedCount() ?? 0;
+//        else:
+//            $this->Retorno = 0;
+//        endif;
+
+//        $array = [];
+
+//        $array = [$this->Dados, $this->FILES];
+        //exit(print_r($this->Dados));
+        //exit(print_r($this->FILES));
+        //$this->Retorno = json_encode($this->Dados);
+        unset($this->Dados[0]["Enviar"]);
+
         if(!is_null($this->Dados)):
+            $Inserir = new Inserir();
+            $Inserir->exeInserir("estabelecimento", $this->Dados[0]);
 
-            //@$Dados = [ "identify" => md5($this->Dados["nome"].date('dmYHis')), "dados" => [$this->Dados]];
-
-            $Conexao = $this->Conexao();
-            $Collection = $Conexao->csdb->parceiro;
-
-            $this->Retorno = $Collection->insertOne($this->Dados)->getInsertedCount() ?? 0;
-        else:
-            $this->Retorno = 0;
+            if($Inserir->Resultado() > 0):
+                Imagem::putimagem([0 => ["id_estabelecimento" => $Inserir->Resultado()], $this->Dados[1]]);
+            endif;
         endif;
     }
 

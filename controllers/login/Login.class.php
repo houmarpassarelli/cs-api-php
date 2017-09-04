@@ -30,7 +30,7 @@ class Login extends Conexao
                                             u.codigo,
                                             u.nome,
                                             u.sobrenome,
-                                            u.avatar,
+                                            img.x480 AS avatar,
                                             u.email,
                                             u.visivel,
                                             s.hash AS session_id,
@@ -48,9 +48,10 @@ class Login extends Conexao
                                             LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
                                             LEFT JOIN usuario_access ac ON ac.id_usuario = u.id_usuario
                                             LEFT JOIN usuario_sessao s ON s.id_usuario_access = ac.id_usuario_access
-                                            LEFT JOIN usuario_aauth ath ON ath.id_usuario_access = s.id_usuario_access
+                                            LEFT JOIN usuario_auth ath ON ath.id_usuario_access = s.id_usuario_access
                                             LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
                                             LEFT JOIN pacote_interacao p ON p.id_usuario = u.id_usuario
+                                            LEFT JOIN img_interacao img ON img.id_usuario = u.id_usuario
                                             WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
 
                 $this->Retorno = json_encode(['codigo' => '200', 'profile' => $Profile->Resultado()[0]]);
@@ -73,7 +74,7 @@ class Login extends Conexao
                                                 u.codigo,
                                                 u.nome,
                                                 u.sobrenome,
-                                                u.avatar,
+                                                img.x480 AS avatar,
                                                 u.email,
                                                 u.visivel,
                                                 s.hash AS session_id,
@@ -91,9 +92,10 @@ class Login extends Conexao
                                                 LEFT JOIN usuario_endereco e ON e.id_usuario = u.id_usuario
                                                 LEFT JOIN usuario_access ac ON ac.id_usuario = u.id_usuario
                                                 LEFT JOIN usuario_sessao s ON s.id_usuario_access = ac.id_usuario_access
-                                                LEFT JOIN usuario_aauth ath ON ath.id_usuario_access = s.id_usuario_access
+                                                LEFT JOIN usuario_auth ath ON ath.id_usuario_access = s.id_usuario_access
                                                 LEFT JOIN cidade c ON c.id_cidade = e.cidade_id
                                                 LEFT JOIN pacote_interacao p ON p.id_usuario = u.id_usuario
+                                                LEFT JOIN img_interacao img ON img.id_usuario = u.id_usuario
                                                 WHERE u.id_usuario = :id", NULL, NULL, "id={$Exibir->Resultado()[0]['id_usuario']}", FALSE);
 
                     $this->Retorno = json_encode(['codigo' => '200', 'profile' => $Profile->Resultado()[0]]);
@@ -119,7 +121,7 @@ class Login extends Conexao
         ];
 
         $Inserir = new Inserir();
-        $Inserir->exeInserir("usuario_session", $Dados);
+        $Inserir->exeInserir("usuario_sessao", $Dados);
 
         if($Inserir->errorCode() == '23000' || $Inserir->errorCode() == '42S02' || $Inserir->errorCode() == '42S22'):
             $this->Retorno = json_encode(["codigo" => $Inserir->errorCode()]);

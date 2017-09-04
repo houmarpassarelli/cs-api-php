@@ -56,7 +56,8 @@ if(!empty($request["PATH"][2])):
                         "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
                         "ID" => $request["PATH"][4],
                         "LIMIT" => $request["PATH"][5],
-                        "OFFSET" => $request["PATH"][6]
+                        "OFFSET" => $request["PATH"][6],
+                        "RESOLUTION" => $request["PATH"][7]
                     ]))->Resultado();
                 elseif($request["METHOD"] == "POST"):
                     $output = (new callCupom([
@@ -101,7 +102,7 @@ if(!empty($request["PATH"][2])):
                 if($request["METHOD"] == 'POST'):
                     $output = (new callParceiro([
                                     "METODO" => (new System())->URI_COMPARE("16ddac9584e012e2173fb52566979e22"),
-                                    "DADOS" => $dados
+                                    "DADOS" => [$_POST, $_FILES]
                                 ]))->Resultado();
                 else:
                     $output = 'GET - EMPTY';
@@ -111,7 +112,10 @@ if(!empty($request["PATH"][2])):
         case 'pacote' :
             if(!empty($request["PATH"][3])):
                 if($request["METHOD"] == 'GET'):
-                    $output = 'GET';
+                    @$output = (new callPacote([
+                                "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
+                                "ID" => $request["PATH"][4]
+                            ]))->Resultado();
                 elseif($request["METHOD"] == 'POST'):
                     $output = (new callPacote([
                                     "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
@@ -192,8 +196,8 @@ if(!empty($request["PATH"][2])):
             break;
     endswitch;
     file_put_contents('php://output', $output);
-    echo '<pre>';
-    print_r($output);
-    echo '</pre>';
+//    echo '<pre>';
+//    print_r($output);
+//    echo '</pre>';
 endif;
 ?>

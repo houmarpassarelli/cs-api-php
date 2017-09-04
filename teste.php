@@ -1,17 +1,10 @@
 <?php
-/**
- * @filesource   example.php
- * @created      10.12.2015
- * @author       Smiley <smiley@chillerlan.net>
- * @copyright    2015 Smiley
- * @license      MIT
- */
 
 //require_once '../vendor/autoload.php';
 
 require('config.inc.php');
 
-use Intervention\Image\ImageManager;
+//use Intervention\Image\ImageManager;
 
 //$img = (string) Image::make('public/foo.png')->encode('jpg', 75);
 //$jpg = ;
@@ -31,6 +24,51 @@ use Intervention\Image\ImageManager;
 //    exit(print_r($_POST));
 //endif;
 
+//$img = new ImageManager();
+//
+//$Cupom = new Exibir();
+//$Cupom->exeExibir(NULL, "oferta", NULL, NULL, FALSE);
+//
+//$sizes = ['x480' => 480, 'x640' => 640, 'x760' => 760, 'x1024' => 1024, 'x1280' => 1280, 'x1440' => 1440, 'x1920' => 1920, 'x2048' => 2048, 'x2160' => 2160];
+//$Dados = [];
+//
+//for($b=0; $b < count($Cupom->Resultado()); $b++):
+//    for ($a = 0; $a < count($sizes); $a++):
+//        $Dados[$b]['id_oferta'] = $Cupom->Resultado()[$b]['id_oferta'];
+//        $Dados[$b]['original'] = $img->make('./prato.jpg')->encode('data-url');
+//        $Dados[$b][array_keys($sizes)[$a]] = $img->make('./prato.jpg')->encode('jpg', 85)->widen(array_values($sizes)[$a])->encode('data-url');
+//    endfor;
+//endfor;
+
+//for ($a = 0; $a < count($sizes); $a++):
+    //for($b=0; $b < count($Cupom->Resultado()); $b++):
+        //$Dados[$b]['id_oferta'] = $Cupom->Resultado()[$b]['id_oferta'];
+//        $Dados['original'] = $img->make('./prato.jpg')->encode('data-url');
+//        $Dados[array_keys($sizes)[$a]] = $img->make('./prato.jpg')->encode('jpg', 85)->widen(array_values($sizes)[$a])->encode('data-url');
+    //endfor;
+//endfor;
+
+//for($c=0;$c < count($Dados); $c++):
+//    $Dados[$c]['id_oferta'] = $Cupom->Resultado()[$c];
+//endfor;
+
+
+
+//echo '<pre>';
+//print_r($Dados);
+//echo count($Cupom->Resultado());
+//echo '</pre>';
+//$Inserir = new Inserir();
+
+//for($c = 0; $c < count($Cupom->Resultado());$c++):
+//
+//endfor;
+
+print_r($_POST);
+echo '<br />';
+print_r($_FILES);
+
+
 ?>
 
 <html>
@@ -38,11 +76,12 @@ use Intervention\Image\ImageManager;
     <meta charset="UTF-8" />
 </head>
 <body>
-<form enctype="multipart/form-data" method="post" action="http://10.0.3.32:8080/cs_api/bf19122987928493131d5bf846637fbc">
+<!--<form enctype="multipart/form-data" method="post" action="--><?php //echo $_SERVER['PHP_SELF']?><!--">-->
+<form enctype="multipart/form-data" method="post" action="http://localhost/cs_api/22935d7f7084b1ef474f7a006d2102ce">
+    <label>Titulo</label>
+    <input type="text" name="titulo" />
     <input type="file" name="arquivos[]" multiple />
     <input type="submit" name="Enviar" />
 </form>
-<!--<img src="data:image/jpeg;base64,"  />-->
-<!--<img src="--><?php //echo (new ImageManager())->make('teste2.jpg')->encode('jpg', 85)->widen(2048)->encode('data-url') ?><!--" style="width:100%;"/>-->
 </body>
 </html>

@@ -90,6 +90,7 @@ class System extends Conexao
                         "putcupom" => "e2f189e0949db9308441953db5293a72",
                         "putcupommarket" => "dc122f8086185814ff083b7ce05509d4",
                         "putcupomrating" => "5ca6eb852234e7d4bf020273bdd11ce2",
+                        "setcupomuser" => "53fd1f2271d6ba456aa18585d9175211",
                         "updatecupom" => "cb1219577315b48fba401a166f4c99c0",
                         "deletecupom" => "5a7ce680226189faf51dce0b5419b77a",
                         "login" => "d56b699830e77ba53855679cb1d252da",
@@ -108,9 +109,9 @@ class System extends Conexao
                         "putcontato" => "0c6ed687d54ffc4b7c1df5ccbe6c6e30",
                         "updatecontato" => "",
                         "deletecontato" => "",
-                        "imagem" => "bf19122987928493131d5bf846637fbc",
-                        "putimagem" => "c99a3febab0c09597b6dd62a1ba25cb7",
-                        "getimagemperXnID" => "169a0bd32884f98127aa2530f1c37e4e"
+                        "imagem" => "",
+                        "putimagem" => "",
+                        "getimagemperXnID" => ""
                     ];
      
        

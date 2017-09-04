@@ -4,20 +4,19 @@ use Intervention\Image\ImageManager;
 
 class Imagem{
 
-    private $Retorno;
-    private $Dados;
+//    private $Retorno;
+//    private $Dados;
+//
+//    public function Retorno(array $dados){
+//
+//        $this->Dados = $dados["DADOS"] ?? NULL;
+//        $this->{$dados["METODO"]}();
+//
+//        return $this->Retorno;
+//    }
 
-    public function Retorno(array $dados){
-
-        $this->Dados = $dados["DADOS"] ?? NULL;
-        $this->{$dados["METODO"]}();
-
-        return $this->Retorno;
-    }
-
-    private function putimagem()
+    static public function putimagem(array $dados)
     {
-
         $img = new ImageManager();
         $Inserir = new Inserir();
 
@@ -25,9 +24,10 @@ class Imagem{
         $Dados = [];
 
         for ($a = 0; $a < count($sizes); $a++):
-            for($b=0; $b < count($this->Dados['arquivos']['tmp_name']); $b++):
-                $Dados[$b]['original'] = $img->make($this->Dados['arquivos']['tmp_name'][$b])->encode('data-url');
-                $Dados[$b][array_keys($sizes)[$a]] = $img->make($this->Dados['arquivos']['tmp_name'][$b])->encode('jpg', 85)->widen(array_values($sizes)[$a])->encode('data-url');
+            for($b=0; $b < count($dados[1]['arquivos']['tmp_name']); $b++):
+                $Dados[$b][array_keys($dados[0])[0]] = array_values($dados[0])[0];
+                $Dados[$b]['original'] = $img->make($dados[1]['arquivos']['tmp_name'][$b])->encode('data-url');
+                $Dados[$b][array_keys($sizes)[$a]] = $img->make($dados[1]['arquivos']['tmp_name'][$b])->encode('jpg', 85)->widen(array_values($sizes)[$a])->encode('data-url');
             endfor;
         endfor;
 
@@ -40,14 +40,22 @@ class Imagem{
         endif;
     }
 
-    private function getimagemperXnID()
+    static public function directXperRequest($resolution)
     {
-        $Exibir = new Exibir();
+        $return = NULL;
 
-        $Exibir->exeExibir("SELECT x480 FROM img_interacao", NULL, NULL, NULL, FALSE);
+        switch(true):
+            case (intval($resolution) <= 480) : $return = 'x480'; break;
+            case (intval($resolution) >= 481 && intval($resolution) <= 640) : $return = 'x640'; break;
+            case (intval($resolution) >= 641 && intval($resolution) <= 760) : $return = 'x760'; break;
+            case (intval($resolution) >= 761 && intval($resolution) <= 1024) : $return = 'x1024'; break;
+            case (intval($resolution) >= 1025 && intval($resolution) <= 1280) : $return = 'x1280'; break;
+            case (intval($resolution) >= 1281 && intval($resolution) <= 1440) : $return = 'x1440'; break;
+            case (intval($resolution) >= 1441 && intval($resolution) <= 1920) : $return = 'x1920'; break;
+            case (intval($resolution) >= 1921 && intval($resolution) <= 2048) : $return = 'x2048'; break;
+            case (intval($resolution) >= 2049 && intval($resolution) <= 2160) : $return = 'x2160'; break;
+        endswitch;
 
-        $this->Retorno = json_encode($Exibir->Resultado()[0]);
-
+        return $return;
     }
-
 }
