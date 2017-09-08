@@ -24,7 +24,12 @@ class Cupom
         return $this->Retorno;
     }
 
-    static public function setcupomuser(array $dados){
+    private function setcupomuser(){
+
+        $nomes = ["a","e","i","o","u","A","E","I","O","U","da","de","di","do","du","DA","DE","DI","DO","DU"];
+
+        $Usuario = new Exibir();
+        $Usuario->exeExibir("SELECT nome, sobrenome, id_usuario FROM usuario WHERE codigo = :id", NULL, NULL, "id={$this->Dados["codigo"]}", FALSE);
 
         $Cupom = new Exibir();
         $Cupom->exeExibir("SELECT id_oferta, id_pacote FROM oferta", NULL, NULL, NULL, FALSE);
@@ -35,8 +40,8 @@ class Cupom
         $qrImageOptions->pixelSize = 8;
         $qrImageOptions->base64 = true;
 
-        foreach(explode(" ", $dados["sobrenome"]) as $Value):
-            if(($Value <> "da") && ($Value <> "de") && ($Value <> "di") && ($Value <> "do") && ($Value <> "du")):
+        foreach(explode(" ", $Usuario->Resultado()[0]["sobrenome"]) as $Value):
+            if(!in_array($Value, $nomes)):
                 $iniSobrenome .= substr($Value, 0 , 1);
             endif;
         endforeach;
@@ -45,14 +50,14 @@ class Cupom
 
         for($a=0;$a < count($Cupom->Resultado()); $a++):
 
-            $hash = sha1($dados['id_usuario'].date("dmYHis").$Cupom->Resultado()[$a]["id_oferta"]);
-            $altQRCode = strtoupper(substr($dados["nome"], 0 , 1).$iniSobrenome.substr($dados['id_usuario'],0 , 3).substr($hash,0, 3));
+            $hash = sha1($Usuario->Resultado()[0]['id_usuario'].date("dmYHis").$Cupom->Resultado()[$a]["id_oferta"]);
+            $altQRCode = strtoupper(substr($Usuario->Resultado()[0]["nome"], 0 , 1).$iniSobrenome.substr($Usuario->Resultado()[0]['id_usuario'],0 , 3).substr($hash,0, 3));
             $qrcode = (new QRCode($hash.$altQRCode, new QRImage($qrImageOptions)))->output();
 
 
             $Inserir->exeInserir("oferta_interacao",
                 ["id_pacote" => $Cupom->Resultado()[$a]["id_pacote"],
-                "id_usuario" => $dados['id_usuario'],
+                "id_usuario" => $Usuario->Resultado()[0]['id_usuario'],
                 "id_oferta" => $Cupom->Resultado()[$a]["id_oferta"],
                 "hash" => $hash,
                 "altcode" => $altQRCode,
@@ -60,8 +65,6 @@ class Cupom
             );
         endfor;
 
-//        $Inserir = new Inserir();
-//        $Inserir->exeInserir("oferta_interacao", ["id_pacote" => $dados["codpack"], "id_usuario" => $dados["iduser"], "id_oferta" => $dados["codcupom"], "hash" => $dados["hash"], "altcode" => $dados["altcode"], "qrcode" => $dados["qrcode"]]);
     }
 
     private function getcupom(){
@@ -101,11 +104,22 @@ class Cupom
 
     private function putcupom(){
 
-        $this->Dados["codigo"] = System::longRandnDateCode();
-        $this->Dados["dias_uso"] = serialize($this->Dados["dias_uso"]);
+        $this->Dados[0]["codigo"] = System::longRandnDateCode();
+//        $this->Dados[0]["dias_uso"] = serialize($this->Dados["dias_uso"]);
+//
+//        $Inserir = new Inserir();
+//        $Inserir->exeInserir("oferta", $this->Dados);
 
-        $Inserir = new Inserir();
-        $Inserir->exeInserir("oferta", $this->Dados);
+        unset($this->Dados[0]["Enviar"]);
+
+        if(!is_null($this->Dados)):
+            $Inserir = new Inserir();
+            $Inserir->exeInserir("oferta", $this->Dados[0]);
+
+            if($Inserir->Resultado() > 0):
+                Imagem::putimagem([0 => ["id_oferta" => $Inserir->Resultado()], $this->Dados[1]]);
+            endif;
+        endif;
     }
 
     private function updatecupom(){
@@ -314,6 +328,52 @@ class Cupom
                                     WHERE c.id_oferta = (SELECT id_oferta FROM oferta WHERE codigo = :codigo)", NULL, NULL, "codigo={$this->ID}", FALSE);
 
         $this->Retorno = json_encode($Exibir->Resultado());
+    }
+
+    private function getcupomimg(){
+
+        $resolution = Imagem::directXperRequest($this->RESOLUTION);
+
+        $Condicoes = '';
+        $Parse = '';
+        $Retorno = NULL;
+
+        if(!empty($this->LIMITE)):
+            $Condicoes .= "LIMIT :limit ";
+            $Parse .= "limit={$this->LIMITE}";
+        endif;
+
+        if(!empty($this->OFFSET)):
+            $Condicoes .= "OFFSET :offset ";
+            $Parse .= "&offset={$this->OFFSET}";
+        endif;
+
+        $Exibir = new Exibir();
+
+        if(!is_null($this->ID)):
+            $Exibir->exeExibir("SELECT
+                                        img.{$resolution},
+                                        o.codigo
+                                        FROM img_interacao img
+                                        JOIN oferta o ON o.id_oferta = img.id_oferta
+                                        WHERE o.codigo = :codigo", NULL, NULL, "codigo={$this->ID}", FALSE);
+
+            if($Exibir->rowCount() > 1):
+                $Retorno = $Exibir->Resultado();
+            else:
+                $Retorno = $Exibir->Resultado()[0];
+            endif;
+        else:
+            $Exibir->exeExibir("SELECT
+                                        img.{$resolution},
+                                        o.codigo
+                                        FROM img_interacao img
+                                        JOIN oferta o ON o.id_oferta = img.id_oferta {$Condicoes}", NULL, NULL, "{$Parse}", FALSE);
+
+            $Retorno = $Exibir->Resultado();
+        endif;
+
+        $this->Retorno = json_encode($Retorno);
     }
 
     private function putcupommarket(){

@@ -59,7 +59,7 @@ if(!empty($request["PATH"][2])):
                         "OFFSET" => $request["PATH"][6],
                         "RESOLUTION" => $request["PATH"][7]
                     ]))->Resultado();
-                elseif($request["METHOD"] == "POST"):
+                elseif($request["METHOD"] == 'POST'):
                     $output = (new callCupom([
                                 "METODO" => (new System())->URI_COMPARE($request["PATH"][3]),
                                 "DADOS" => $dados
@@ -77,7 +77,7 @@ if(!empty($request["PATH"][2])):
                 if($request["METHOD"] == 'POST'):
                     $output = (new callCupom([
                                             "METODO" => (new System())->URI_COMPARE("e2f189e0949db9308441953db5293a72"),
-                                            "DADOS" => $dados
+                                            "DADOS" => [$_POST, $_FILES]
                                         ]))->Resultado();
                 else:
                     $output = (new callCupom(["METODO" => (new System())->URI_COMPARE("15bc2f541b0ff3869471b514eb5e4fa9")]))->Resultado();

@@ -94,9 +94,7 @@ class Usuario extends Conexao
 
                 $Inserir->exeInserir("usuario_auth", $DadosAuth);
 
-                $this->Retorno = json_encode(["codigo" => "200"]);
-
-                Cupom::setcupomuser(["id_usuario" => $DadosAcesso["id_usuario"], "nome" => $DadosUsuario["nome"], "sobrenome" => $DadosUsuario["sobrenome"]]);
+                $this->Retorno = json_encode(["codigo" => "200", "usuario_id" => $DadosUsuario["codigo"]]);
             else:
                 if(!$verificaEmail[0]):
                     $this->Retorno = json_encode(["codigo" => $verificaEmail[1]]);

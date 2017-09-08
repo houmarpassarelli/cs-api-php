@@ -77,11 +77,24 @@ print_r($_FILES);
 </head>
 <body>
 <!--<form enctype="multipart/form-data" method="post" action="--><?php //echo $_SERVER['PHP_SELF']?><!--">-->
+<h3>Estabelecimento</h3>
 <form enctype="multipart/form-data" method="post" action="http://localhost/cs_api/22935d7f7084b1ef474f7a006d2102ce">
     <label>Titulo</label>
     <input type="text" name="titulo" />
     <input type="file" name="arquivos[]" multiple />
     <input type="submit" name="Enviar" />
+</form>
+<hr />
+<h3>Cupom</h3>
+<form enctype="multipart/form-data" method="post" action="http://10.0.3.32:8080/cs_api/f61e7f04c539f2aa08d2ddb23be63f92">
+<label>Titulo</label>
+<input type="text" name="titulo" />
+<label>ID Estabelecimento</label>
+<input type="number" name="id_estabelecimento" />
+<label>ID Pacote</label>
+<input type="number" name="id_pacote" />
+<input type="file" name="arquivos[]" multiple />
+<input type="submit" name="Enviar" />
 </form>
 </body>
 </html>

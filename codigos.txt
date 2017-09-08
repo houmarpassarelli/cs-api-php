@@ -18,3 +18,15 @@ Genéricos
     23000 => Restrição de CONSTRAINT de KEY (Database)
     42S02 => Erro de coluna, inválida
     42S22 => Erro de tabela, inválida
+
+RESOLUÇÕES
+
+320 ~ 480 = 480
+481 ~ 640 = 640
+641 ~ 760 = 760
+761 ~ 1024 = 1024
+1025 ~ 1280 = 1280
+1281 ~ 1440 = 1440
+1441 ~ 1920 = 1920
+1921 ~ 2048 = 2048
+2049 ~ 2160 = 2160
